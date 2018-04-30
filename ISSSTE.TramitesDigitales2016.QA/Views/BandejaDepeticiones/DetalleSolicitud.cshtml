@@ -1,0 +1,347 @@
+﻿
+@{
+    ViewBag.Title = "Detalle de la Petición";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+<h2>DetalleSolicitud</h2>
+@using (Html.BeginForm("BuscarPeticion", "BandejaDepeticiones", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container" ng-app="requestForm" ng-controller="RequestController as request">
+        <div class="row">
+            <form name="requestForm" role="form" ng-submit="" novalidate>
+                <section>
+                    <br />
+                    <div class="row form-group">
+                        <div class=" col-lg-6">
+                            <button class="btn  btn-sm btn-primary" id="enviarSol" name="enviarSol" type="submit">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                Editar
+                            </button>
+
+                            @Html.ActionLink(" Cancelar", "BandejaIndex", new object { },
+         new { @class = "btn btn-danger  glyphicon glyphicon-remove", @style = "color:white", @type = "submit" })
+                        </div>
+                        <div class="col-lg-6">
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="form-group col-md-12">
+                        <h3>Datos del peticionario</h3>
+                        <hr class="red bottom-buffer top-buffer" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" id="LblCurpPeticionario">Clave única de registro de población
+                            <span class=”red”>*</span>:</label>
+                            <input type="text" class="form-control" ng-class="{redBorderError: requestForm.curpPetTxt.$invalid && requestForm.curpPetTxt.$dirty}" id="curpPetTxt"
+                                   name="curpPetTxt" placeholder="Ingresa tu CURP" ng-model="request.userData.requesterCurp" ng-pattern="request.regexCURP" ng-model-options="{updateOn: 'blur'}" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.curpPetTxt.$error" ng-if="requestForm.curpPetTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="rfcPetTxt">Registro federal de contribuyente:</label>
+                            <input type="text" class="form-control" id="rfcPetTxt" name="rfcPetTxt" placeholder="Ingresa tu RFC" ng-class="{redBorderError: requestForm.rfcPetTxt.$invalid && requestForm.rfcPetTxt.$dirty}"
+                                   ng-pattern="request.regexRFC" ng-model="request.userData.requesterRfc" ng-model-options="{updateOn: 'blur'}" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.rfcPetTxt.$error" ng-if="requestForm.rfcPetTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="nombreTxt">Nombre(s):</label>
+                            <input type="text" class="form-control" id="nombreTxt" name="nombreTxt" placeholder="Ingresa tu(s) nombre(s)" ng-class="{redBorderError: requestForm.nombreTxt.$invalid && requestForm.nombreTxt.$dirty}"
+                                   ng-pattern="request.regexSoloLetras" ng-model="request.userData.requesterName" ng-model-options="{updateOn: 'blur'}" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.nombreTxt.$error" ng-if="requestForm.nombreTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="apPaternoTxt">Apellido paterno:</label>
+                            <input type="text" class="form-control" id="apPaternoTxt" name="apPaternoTxt" ng-model="request.userData.requesterFirstName" ng-pattern="request.regexSoloLetras"
+                                   ng-model-options="{updateOn: 'blur'}" ng-class="{redBorderError: requestForm.apPaternoTxt.$invalid && requestForm.apPaternoTxt.$dirty}" placeholder="Ingresa tu primer apellido" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.apPaternoTxt.$error" ng-if="requestForm.apPaternoTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="apMaternoTxt">Apellido materno:</label>
+                            <input type="text" class="form-control" id="apMaternoTxt" name="apMaternoTxt" ng-model="request.userData.requesterSecondName" ng-pattern="request.regexSoloLetras"
+                                   ng-model-options="{updateOn: 'blur'}" ng-class="{redBorderError: requestForm.apMaternoTxt.$invalid && requestForm.apMaternoTxt.$dirty}" placeholder="Ingresa tu segundo apellido" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.apMaternoTxt.$error" ng-if="requestForm.apMaternoTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="sexoSlct">Sexo:</label>
+                            <select class="form-control" id="sexoSlct" name="sexoSlct" ng-model="request.userData.requesterGender" ng-options="genderItem.gender for genderItem in request.gendersColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="tipoDerSlct">Tipo de derechohabiente:</label>
+                            <select class="form-control" id="tipoDerSlct" name="tipoDerSlct" ng-model="request.userData.rightholderType" ng-options="rhItem.desc for rhItem in request.rightholderColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="form-group col-md-12">
+                        <h3>Datos de contacto</h3>
+                        <hr class="red bottom-buffer top-buffer" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="codPostTxt">Código postal:</label>
+                            <input type="text" class="form-control" id="codPostTxt" name="codPostTxt" ng-model="request.userData.requesterZipCode" ng-pattern="request.regexCodigoPostal"
+                                   ng-class="{redBorderError: requestForm.codPostTxt.$invalid && requestForm.codPostTxt.$dirty}" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa código postal" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.codPostTxt.$error" ng-if="requestForm.codPostTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="estadoSlct">Estado:</label>
+                            <select class="form-control" id="estadoSlct" name="estadoSlct" ng-model="request.userData.requesterState">
+                                <option disabled="disabled" selected="selected">-Seleccionar-</option>
+                            </select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="municipioSlct">Municipio o alcaldía:</label>
+                            <input type="text" class="form-control" id="municipioSlct" name="municipioSlct" list="municipiosList" placeholder="Selecciona o ingresa el municipio*" ng-model="request.userData.requesterMunicipal" />
+                            <datalist id="municipiosList">
+                                <option value="Municipio1">Municipio 1</option>
+                            </datalist>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="coloniaTxt">Colonia:</label>
+                            <input type="text" class="form-control" id="coloniaTxt" name="coloniaSlct" placeholder="Ingresa la colonia" ng-class="{redBorderError: requestForm.coloniaSlct.$invalid && requestForm.coloniaSlct.$dirty}"
+                                   ng-pattern="request.regexTextoLibre" ng-model-options="{updateOn: 'blur'}" ng-model="request.userData.requesterColony" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.coloniaSlct.$error" ng-if="requestForm.coloniaSlct.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="calleTxt">Calle:</label>
+                            <input type="text" class="form-control" id="calleTxt" name="calleTxt" ng-model="request.userData.requesterStreet"
+                                   ng-class="{redBorderError: requestForm.calleTxt.$invalid && requestForm.calleTxt.$dirty}"
+                                   ng-pattern="request.regexTextoLibre" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa calle" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.calleTxt.$error" ng-if="requestForm.calleTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="numExtTxt">Número exterior:</label>
+                            <input type="text" class="form-control" id="numExtTxt" name="numExtTxt" ng-model="request.userData.requesterExtNumber" ng-class="{redBorderError: requestForm.numExtTxt.$invalid && requestForm.numExtTxt.$dirty}" ng-pattern="request.regexTextoLibre"
+                                   ng-model-options="{updateOn: 'blur'}" placeholder="Número exterior domicilio" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.numExtTxt.$error" ng-if="requestForm.numExtTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="numIntTxt">Número interior:</label>
+                            <input type="text" class="form-control" id="numIntTxt" name="numIntTxt" ng-model="request.userData.requesterIntNumber" ng-class="{redBorderError: requestForm.numExtTxt.$invalid && requestForm.numExtTxt.$dirty}"
+                                   ng-pattern="request.regexTxtLibreOpc" ng-model-options="{updateOn: 'blur'}" placeholder="Número interior domicilio" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.numIntTxt.$error" ng-if="requestForm.numIntTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="ladaTxt">Lada:</label>
+                            <input type="text" class="form-control" id="ladaTxt" name="ladaTxt" ng-model="request.userData.requesterLada" ng-pattern="request.regexSoloNumeros"
+                                   ng-class="{redBorderError: requestForm.ladaTxt.$invalid && requestForm.ladaTxt.$dirty}" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa lada" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.ladaTxt.$error" ng-if="requestForm.ladaTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="telefTxt">Teléfono fijo:</label>
+                            <input type="text" class="form-control" id="telefTxt" name="telefTxt" ng-model="request.userData.requesterFixedPhone" ng-class="{redBorderError: requestForm.telefTxt.$invalid && requestForm.telefTxt.$dirty}"
+                                   ng-pattern="request.regexTelefono" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa teléfono" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.telefTxt.$error" ng-if="requestForm.telefTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="celTxt">Teléfono móvil:</label>
+                            <input type="text" class="form-control" id="celTxt" name="celTxt" ng-model="request.userData.requestarMobilPhone" ng-class="{redBorderError: requestForm.celTxt.$invalid && requestForm.celTxt.$dirty}" ng-pattern="request.regexTelefono"
+                                   ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa móvil" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.celTxt.$error" ng-if="requestForm.celTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="emailTxt">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="emailTxt" name="emailTxt" ng-model="request.userData.requesterEmail" ng-class="{redBorderError: requestForm.emailTxt.$invalid && requestForm.emailTxt.$dirty}"
+                                   ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa email" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.emailTxt.$error" ng-if="requestForm.emailTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+
+                    </div>
+                </section>
+                <seccion>
+                    <div class="form-group col-md-12">
+                        <h3>Datos del afectado</h3>
+                        <hr class="red">
+                    </div>
+                    <div class="row" id="formAfectado">
+                        <div class="form-group col-md-4">
+                            <label for="curpAfectadoTxt" class="control-label">CURP del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="curpAfectadoTxt" name="curpAfectadoTxt" ng-minlength="18" ng-model-options="{updateOn: 'blur'}" ng-class="{redBorderError: requestForm.curpAfectadoTxt.$invalid && requestForm.curpAfectadoTxt.$dirty}" ng-pattern="request.regexCURP"
+                                   ng-model="request.userData.affectedCurp" maxlength="18" placeholder="Ingresa CURP del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.curpAfectadoTxt.$error" ng-if="requestForm.curpAfectadoTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="rfcAfectadoTxt" class="control-label">RFC del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="rfcAfectadoTxt" name="rfcAfectadoTxt" ng-minlength="10" ng-model-options="{updateOn: 'blur'}" ng-class="{redBorderError: requestForm.rfcAfectadoTxt.$invalid && requestForm.rfcAfectadoTxt.$dirty}" ng-pattern="request.regexRFC"
+                                   ng-model="request.userData.affectedRfc" maxlength="13" placeholder="Ingresa RFC del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.rfcAfectadoTxt.$error" ng-if="requestForm.rfcAfectadoTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecNomTxt" class="control-label">Nombre(s) del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="afecNomTxt" name="afecNomTxt" ng-model="request.userData.affectedName" ng-class="{redBorderError: requestForm.afecNomTxt.$invalid && requestForm.afecNomTxt.$dirty}" ng-pattern="request.regexSoloLetras"
+                                   ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa nombre del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.afecNomTxt.$error" ng-if="requestForm.afecNomTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecApPatTxt" class="control-label">Apellido paterno del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="afecApPatTxt" name="afecApPatTxt" ng-model="request.userData.affectedFirstName" ng-class="{redBorderError: requestForm.afecApPatTxt.$invalid && requestForm.afecApPatTxt.$dirty}"
+                                   ng-pattern="request.regexSoloLetras" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa el primer apellido del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.afecApPatTxt.$error" ng-if="requestForm.afecApPatTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecApMatTxt" class="control-label">Apellido materno del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="afecApMatTxt" name="afecApMatTxt" ng-model="request.userData.affectedSecondName" ng-class="{redBorderError: requestForm.afecApMatTxt.$invalid && requestForm.afecApMatTxt.$dirty}"
+                                   ng-pattern="request.regexSoloLetras" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa el segundo apellido del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.afecApMatTxt.$error" ng-if="requestForm.afecApMatTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecSexoSlct" class="control-label">Sexo del afectado:</label>
+                            <select class="form-control afectadoInputTD" id="afecSexoSlct" name="afecSexoSlct" ng-model-options="{updateOn: 'blur'}" ng-model="request.userData.affectedGender" ng-options="genderItem.gender for genderItem in request.gendersColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecTipoDerSlct" class="control-label">Tipo de derechohabiente:</label>
+                            <select class="form-control afectadoInputTD" id="afecTipoDerSlct" name="afecTipoDerSlct" ng-model="request.userData.affectedRightholderType" ng-options="rhItem.desc for rhItem in request.rightholderColl"> </select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecTelTxt" class="control-label">Teléfono del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="afecTelTxt" name="afecTelTxt" ng-model="request.userData.affectedPhone" ng-class="{redBorderError: requestForm.afecTelTxt.$invalid && requestForm.afecTelTxt.$dirty}"
+                                   ng-pattern="request.regexTelefono" ng-model-options="{updateOn: 'blur'}" placeholder="Teléfono del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.afecTelTxt.$error" ng-if="requestForm.afecTelTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecEmailTxt" class="control-label">Correo electrónico del afectado:</label>
+                            <input type="text" class="form-control afectadoInputTD" id="afecEmailTxt" name="afecEmailTxt" ng-model="request.userData.affectedEmail" ng-class="{redBorderError: requestForm.afecEmailTxt.$invalid && requestForm.afecEmailTxt.$dirty}" ng-model-options="{updateOn: 'blur'}" placeholder="Ingresa email del afectado" />
+                            <span class="tabValidation">*</span>
+                            <span class="angularMsgError" ng-messages="requestForm.afecEmailTxt.$error" ng-if="requestForm.afecEmailTxt.$dirty">
+                                <span ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                        </div>
+
+                    </div>
+                </seccion>
+                <section>
+                    <div class="form-group col-md-12">
+                        <h3>Descripción de la petición</h3>
+                        <hr class="red bottom-buffer top-buffer" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="areaPeticionSlct" class="control-label">Área a donde corresponde la petición:</label>
+                            <select class="form-control" id="areaPeticionSlct" name="areaPeticionSlct" ng-model="request.userData.petitionArea" ng-options="areaPetItem.desc for areaPetItem in request.requestAreaColl"> </select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="delPeticionSlct" class="control-label">Delegación/Hospitales:</label>
+                            <select class="form-control" id="delPeticionSlct" name="delPeticionSlct" ng-model="request.userData.requestDelegation" ng-options="delItem.desc for delItem in request.requestDelColl"> </select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="unidadPeticionSlct" class="control-label">Nombre de la unidad:</label>
+                            <select class="form-control" id="unidadPeticionSlct" name="unidadPeticionSlct" ng-model="request.userData.requestUnit" ng-options="unitItem.desc for unitItem in request.requestUnitColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="opinionPetSlct" class="control-label">Tipo de opinión:</label>
+                            <select class="form-control" id="opinionPetSlct" name="opinionPetSlct" ng-model="request.userData.requestOpinion" ng-options="opinionItem.desc for opinionItem in request.opinionTypeColl"> </select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="asuntoPetSlct" class="control-label">Causa del asunto:</label>
+                            <select class="form-control" id="asuntoPetSlct" name="asuntoPetSlct" ng-model="request.userData.requestSubject" ng-options="subjectItem.desc for subjectItem in request.subjectCauseColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group datepicker-group col-md-4">
+                            <label for="hechosdatePicker" class="control-label">Fecha de los hechos:</label>
+                            <input type="text" class="form-control" id="hechosdatePicker" name="hechosdatePicker" placeholder="Selecciona fecha" ng-model="request.userData.requestDate" />
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="servicioHechoSlct" class="control-label">Servicios donde ocurrieron los hechos:</label>
+                            <select class="form-control" id="servicioHechoSlct" name="servicioHechoSlct" ng-model="request.userData.requestPlace" ng-options="placeItem.desc for placeItem in request.requestPlaceColl"></select>
+                            <span class="tabValidation">*</span>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="descTxtArea" class="control-label">Descripción:</label>
+                            <textarea id="descTxtArea" name="descTxtArea" ng-model="request.userData.requestDescription" ng-class="{redBorderError: requestForm.descTxtArea.$invalid && requestForm.descTxtArea.$dirty}" ng-trim="false"
+                                      ng-pattern="request.regexTextoLibre" class="form-control" rows="5" placeholder="Agrega la descripción de los hechos." maxlength="1000"></textarea>
+                            <span ng-messages="requestForm.descTxtArea.$error" ng-if="requestForm.descTxtArea.$dirty">
+                                <span class="angularMsgError" ng-messages-include="/Templates/messages.template.html"></span>
+                            </span>
+                            <span class="tabValidation">*</span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Caracteres restantes: {{1000 - request.userData.requestDescription.length}}</label>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="form-group col-md-12">
+                    <span>{{request.alert}}</span>
+                </div>
+                <div id="leyendaCampos" class="pull-left marg-T10px col-md-12" style="color:#DDDDDD ; ">
+                    *Campos obligatorios
+                </div>
+            </form>
+        </div>
+    </div>
+}

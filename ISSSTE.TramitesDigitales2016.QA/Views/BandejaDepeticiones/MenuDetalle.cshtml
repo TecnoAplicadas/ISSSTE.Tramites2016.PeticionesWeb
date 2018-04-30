@@ -1,0 +1,605 @@
+﻿@model  ISSSTE.TramitesDigitales2016.Modelos.Contextos.pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Detalle_Result
+@using System.Text;
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Detalle de la petición</h2>
+        <hr class="Negro1" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active">
+                    @Html.ActionLink("Detalle de la petición", "MenuDetalle")
+                </li>
+                <li role="presentation">
+                    @Html.ActionLink("Seguimiento", "Seguimiento")
+                </li>
+                <li role="presentation">
+                    @Html.ActionLink("Agregar personal", "PersonalInvolucrado")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <br />
+</div>
+
+@using (Html.BeginForm("ActualizarDatosDeLaPeticion", "BandejaDepeticiones", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-fluid">
+                <section>
+                    <div class="row">
+
+                        <div @ViewBag.BotonCerrarPeticion>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConcluirPeticion">
+                                        Cerrar Petición
+                                    </button>
+                                </div>
+                            </div>
+                            <!--Modal-->
+                            <div class="modal fade" id="modalConcluirPeticion" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header modalBody">
+                                            <!--<a href="#" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>-->
+                                            <h4 class="modal-title">Cerrar Petición.</h4>
+                                        </div>
+                                        <div class="modal-body modalBody">
+                                            <p>¿Desea cerrar la petición?</p>
+                                        </div>
+                                        <div class="modal-footer modalBodyBtn">
+                                            <!--El boton "no", debera cerrar el modal-->
+                                            <button type="button" class="btn btn-danger myBtnModal" data-dismiss="modal">No</button>
+                                            <!--En ésta parte, se coloca el boton con la funcionalidad de angular para concluir la petición-->
+                                            @Html.ActionLink("Si", "CerrarPeticion", new object { },
+                                    new
+                                    {
+                                        @class = "btn btn-primary myBtnModal",
+                                        @style = "color:white",
+                                        @type = "submit"
+                                    })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="btn-group">
+                                    <div @ViewBag.BotonesEditarPeticion>
+                                        <button class="btn  btn-sm btn-danger" id="BtnEditar" name="BtnEditar" onclick="Editar()" type="button">
+                                            <span>Editar</span>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button class="btn  btn-sm btn-primary" style="visibility:hidden" id="BtnGuardar" name="BtnGuardar" type="submit">
+                                            <span>Guardar</span>
+                                            <span class="glyphicon glyphicon-save"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-sm" onclick="location.href='@Url.Action("BandejaIndex", "BandejaDepeticiones")';return false;">
+                                    <span>Cancelar</span>
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+
+                            </div>
+                        </div>
+                        @*<button class="btn  btn-sm btn-default" id="enviarSol" name="BtnEditar" onclick="CalcelarEdicion()" type="button">
+                                <span class="glyphicon glyphicon-eye-close"></span>
+                                Cerrar Petición
+                            </button>*@
+                    </div>
+                </section>
+                <section>
+                    <div class="row">
+                        <br>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label" for="FolioTxt">Folio:</label>
+                            @Html.EditorFor(model => model.Folio, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <h3>Datos del peticionario</h3>
+                        </div>
+                        <hr class="Negro1 bottom-buffer top-buffer" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="curpPetTxt">Clave única de registro de población*:</label>
+                            @*@Html.EditorFor(model => model.CurpPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })*@
+                            @Html.EditorFor(model => model.CurpPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.CurpPeticionario, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="rfcPetTxt">Registro federal de contribuyente:</label>
+                            @Html.EditorFor(model => model.RfcPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.RfcPeticionario, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="nombreTxt">Nombre(s):</label>
+                            @Html.EditorFor(model => model.NombrePeticionario,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true"} })
+                            @Html.ValidationMessageFor(model => model.NombrePeticionario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="apPaternoTxt">Apellido paterno:</label>
+                            @Html.EditorFor(model => model.ApePaternoPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.ApePaternoPeticionario, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="apMaternoTxt">Apellido materno:</label>
+                            @Html.EditorFor(model => model.ApeMaternoPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                            @Html.ValidationMessageFor(model => model.ApeMaternoPeticionario, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="form-group col-md-4">
+                                <label class="control-label" for="sexoSlct">Sexo:</label>
+                                @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control", @disabled = "true" })
+                            </div>*@
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="tipoDerSlct">Tipo de derechohabiente:</label>
+                            @Html.DropDownList("IdTipoDerechohabiente", null, htmlAttributes: new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Sexo:</label>
+                            <br />
+                            @Html.RadioButton("rdbGeneroMasculinoPeti", "false", Convert.ToBoolean(@ViewData["GeneroPetiMasculino"].ToString()), new { @disabled = "true" })
+                            <label for="rdGeneroMasculinoPeticionario" class="control-label">Masculino</label>
+                            @Html.RadioButton("rdbGeneroFemeninoPeti", "false", Convert.ToBoolean(@ViewData["GeneroAPetiFemenino"].ToString()), new { @disabled = "true" })
+                            <label for="rdGeneroFemeninoPeticionario" class="control-label">Femenino</label>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <h3>Datos de contacto</h3>
+                            <hr class="Negro1 bottom-buffer top-buffer" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="codPostTxt">Código postal:</label>
+                            @Html.EditorFor(model => model.CPPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="estadoSlct">Estado:</label>
+                            @Html.DropDownList("CatalogoEstado", null, htmlAttributes: new { @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="municipioSlct">Municipio o alcaldía:</label>
+                            @Html.EditorFor(model => model.MpioPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="coloniaTxt">Colonia:</label>
+                            @Html.EditorFor(model => model.ColoniaPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="calleTxt">Calle:</label>
+                            @Html.EditorFor(model => model.CallePeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="numExtTxt">Número exterior:</label>
+                            @Html.EditorFor(model => model.NumeroExteriorPeticionario,
+                                               new
+                                               {
+                                                   htmlAttributes = new
+                                                   {
+                                                       @class = "form-control",
+                                                       //@style = "width:77px",
+                                                       @disabled = "true"
+                                                   }
+                                               })
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="numIntTxt">Número interior:</label>
+                            @Html.EditorFor(model => model.NumeroInteriorPeticionario,
+                                                 new
+                                                 {
+                                                     htmlAttributes = new
+                                                     {
+                                                         @class = "form-control",
+                                                         //@style = "width:77px",
+                                                         @disabled = "true"
+                                                     }
+                                                 })
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label class="control-label" for="ladaTxt">Lada:</label>
+                            @Html.EditorFor(model => model.LadaPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="telefTxt">Teléfono fijo:</label>
+                            @Html.EditorFor(model => model.TelefonoFijoPeticionario,
+                                        new { htmlAttributes = new { @class = "form-control", @style = "width:190px", @disabled = "true" } })
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="celTxt">Teléfono móvil:</label>
+                            @Html.EditorFor(model => model.TelefonoMovilPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="emailTxt">Correo electrónico:</label>
+                            @Html.EditorFor(model => model.CorreoElectronicoPeticionario, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+
+                </section>
+                <section>
+                    <div class="form-group col-md-12">
+                        <h3>Datos del afectado</h3>
+                        <hr class="Negro1 bottom-buffer top-buffer" />
+                    </div>
+                    @*<div class="row">*@
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="curpAfectadoTxt" class="control-label">CURP del afectado:</label>
+                            @Html.EditorFor(model => model.CurpAfectado,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true", @maxlength = "18" ,
+                                        @minlength = "10" , @style="text-transform:uppercase",
+                                        @onKeypress = "return valTypeAcentos(event)"
+                                        } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.CurpAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="rfcAfectadoTxt" class="control-label">RFC del afectado:</label>
+                            @Html.EditorFor(model => model.RfcAfectado,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true",@maxlength = "10",
+                                        @minlength ="10", @style = "text-transform:uppercase",
+                                        @onKeypress = "return valTypeAcentos(event)"
+                                        } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.RfcAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecNomTxt" class="control-label">Nombre(s) del afectado:</label>
+                            @Html.EditorFor(model => model.NombreAfectado,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true", @maxlength="50",
+                                        @style = "text-transform:uppercase",
+                                        @onKeypress = "return valTypeAcentos(event)"
+                                        }})
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.NombreAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="afecApPatTxt" class="control-label">Apellido paterno del afectado:</label>
+                            @Html.EditorFor(model => model.ApePaternoAfectado, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @maxlength="50", @style = "text-transform:uppercase", @onKeypress = "return valTypeAcentos(event)" } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.ApePaternoAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecApMatTxt" class="control-label">Apellido materno del afectado:</label>
+                            @Html.EditorFor(model => model.ApeMaternoAfectado,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true",
+                                        @maxlength ="50", @style = "text-transform:uppercase",
+                                        @data_toggle = "tooltip", @data_placement = "bottom",
+                                        @title ="En caso de no contar con segundo apellido, favor de poner una “X”",
+                                        @onKeypress = "return valTypeAcentos(event)"
+                                        } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.ApeMaternoAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                        @*<div class="form-group col-md-4">
+                                <label for="afecSexoSlct" class="control-label">Sexo del afectado:</label>
+                                @Html.DropDownList("IdGeneroAfectado", null, htmlAttributes: new { @id = "IdGeneroAfectado", @class = "form-control", @disabled = "true" })
+                            </div>*@
+                        <fieldset class="form-group col-md-4" disabled id="GenerosAfectado">
+                            <div>
+                                <label class="control-label">Sexo:</label>
+                                <br />
+                                @Html.RadioButton("rdbGeneroMasculinoAfectado", "true", Convert.ToBoolean(@ViewData["GeneroAfectadoMasculino"].ToString()))
+                                <label for="rdGeneroMasculinoAfectado" class="control-label">Masculino</label>
+                                @Html.RadioButton("rdbGeneroMasculinoAfectado", "false", Convert.ToBoolean(@ViewData["GeneroAfectadoFemenino"].ToString()))
+                                <label for="rdGeneroFemeninoAfectado" class="control-label">Femenino</label>
+                                @*@Html.RadioButton("rdbGeneroFemeninoAfectado2", "false", true, new {  @disabled = "true" })*@
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="afecTipoDerSlct" class="control-label">Tipo de derechohabiente:</label>
+                            @Html.DropDownList("IdTipoDerechohabienteAfectado", null, htmlAttributes: new { @Id = "IdTipoDerechohabienteAfectado", @class = "form-control", @disabled = "true" })
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label class="control-label" for="ladaTxt">Lada:</label>
+                            @Html.EditorFor(model => model.LadaAfectado, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @maxlength = "3" } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.LadaAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="afecTelTxt" class="control-label">Teléfono:</label>
+                            @Html.EditorFor(model => model.TelefonoFijoAfectado,
+                                   new { htmlAttributes = new { @class = "form-control", @disabled = "true", @maxlength="10",
+                                         @style = "width:190px", @onKeypress = "return valTypeAcentos(event)" } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.TelefonoFijoAfectado, String.Empty, new { @class = "help-block"})
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="afecEmailTxt" class="control-label">Correo electrónico del afectado:</label>
+                            @Html.EditorFor(model => model.CorreoElectronicoAfectado,
+                                    new { htmlAttributes = new { @class = "form-control", @disabled = "true",
+                                          @onKeypress = "return valTypeAcentos(event)" } })
+                            <div class="has-error">
+                                @Html.ValidationMessageFor(m => m.CorreoElectronicoAfectado, String.Empty, new { @class = "help-block" })
+                            </div>
+                        </div>
+                    </div>
+                    @*</div>*@
+                </section>
+                <section>
+                    <div class="form-group  col-md-12">
+                        <h3>Descripción de la petición</h3>
+                        <hr class="Negro1 bottom-buffer top-buffer" />
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                            <label for="areaPeticionSlct" class="control-label">Área a donde corresponde la petición:</label>
+                            @Html.DropDownList("CatalogoDeAreas",
+                            (IEnumerable<SelectListItem>)ViewBag.CatalogoDeAreas,
+                            new
+                            {
+                                @class = "form-control",
+                                @disabled = "true",
+                                @style = "max-width:90%"
+                            })
+                        </div>
+                        <div class="form-group  col-lg-8 col-md-8 col-xs-12">
+                            <label for="delPeticionSlct" class="control-label">Delegación/Hospitales:</label>
+                            @Html.DropDownList("CatalogoDelegacionHospital",
+                            (IEnumerable<SelectListItem>)ViewBag.CatalogoDelegacionHospital,
+                            new { @class = "form-control", @disabled = "true",
+                            @style = "max-width:90%" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-8 col-md-8 col-xs-12">
+                            <label for="unidadPeticionSlct" class="control-label">Nombre de la unidad:</label>
+                            @Html.DropDownList("Miunidad", null, htmlAttributes: new { @class = "form-control", @disabled = "true", @style = "max-width:95%" })
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="opinionPetSlct" class="control-label">Tipo de opinión:</label>
+                            @Html.DropDownList("CatalogoTipoOpinion",
+                                        null, new { @class = "form-control", @disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-8 col-md-8 col-xs-12">
+                            <label for="asuntoPetSlct" class="control-label">Causa del asunto:</label>
+                            @Html.DropDownList("CatlogoCausaAsunto",
+                                               (IEnumerable<SelectListItem>)ViewBag.CatalogoCausasAsunto,
+                                               //new SelectList(string.Empty, "IdCausaAsunto", "Nombre"), "Seleccione",
+                                               new { @class = "form-control" , @disabled = "true",   @style = "max-width:95%" }
+                            )                       
+                         </div>
+                        <div class="form-group col-md-4 col-xs-12">
+                            <label for="hechosdatePicker" class="control-label">Fecha de los hechos:</label>
+                            @Html.EditorFor(model => model.FechaHechos, 
+                            new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-8 col-md-8 col-xs-12">
+                        <label for="servicioHechoSlct" class="control-label">Servicios donde ocurrieron los hechos:</label>
+                        @Html.DropDownList("CatalogoServicioHecho",
+                                (IEnumerable<SelectListItem>)ViewBag.CatalogoServHecho,
+                                //new SelectList(string.Empty, "IdServicioHecho", "Nombre"), "Seleccione",
+                                new { @class = "form-control" , @disabled = "true" , @style = "max-width:95%" }
+                              )                    
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                            <label for="descTxtArea" class="control-label">Descripción:</label>
+                            @Html.TextAreaFor(model => model.Descripcion,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @style = "max-width:95%; height:130px; overflow:auto;resize:none; cursor: default;",
+                                            @disabled = "true"
+                                        }
+                                    )
+                        </div>
+                    </div>
+                </section>
+                </div>
+            </div>
+    </div>
+}
+
+<script>
+    function Editar() {
+    document.getElementById("CurpAfectado").disabled = false;
+    document.getElementById("RfcAfectado").disabled = false;
+    document.getElementById("NombreAfectado").disabled = false;
+    document.getElementById("ApePaternoAfectado").disabled = false;
+    document.getElementById("ApeMaternoAfectado").disabled = false;
+    document.getElementById("GenerosAfectado").disabled = false;
+    document.getElementById("LadaAfectado").disabled = false;    
+    document.getElementById("TelefonoFijoAfectado").disabled = false;
+    document.getElementById("IdTipoDerechohabienteAfectado").disabled = false;
+    document.getElementById("CorreoElectronicoAfectado").disabled = false;
+    document.getElementById("CatalogoDeAreas").disabled = false;
+    document.getElementById("CatalogoTipoOpinion").disabled = false;
+    document.getElementById("CatlogoCausaAsunto").disabled = false;
+    document.getElementById("CatalogoServicioHecho").disabled = false;
+    document.getElementById("BtnGuardar").style.visibility = "visible";
+}
+
+function CalcelarEdicion() {
+}
+
+function valTypeAcentos(event) {
+    key = key = event.keyCode || event.which;
+    caracter = String.fromCharCode(key);
+    if (/^[ÁÄÀÂÉËÈÊÍÏÌÎÓÖÒÔÚÜÙÛ¨'´`\^]$/i.test(caracter))
+    {
+        return false;
+    }
+}
+
+</script>
+
+
+@section Scripts
+{
+@Scripts.Render("~/bundles/JQueryValidaciones")
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    //Crea lista del Menu Izquierdo dejando Activo el seleccionado
+    $(document).ready(function () {
+        $("#liBandeja").addClass('active');
+        $("#liBitacora").removeClass('active');
+        $("#liDias").removeClass('active');
+        $("#liReportes").removeClass('active');
+        $("#liTablero").removeClass('active');
+    });
+</script>    
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoDeAreas").change(function () {
+            $("#CatlogoCausaAsunto").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostGetCausaAsuntoEdicion")', // we are calling json method
+               dataType: 'json',
+               data: { idTipoOpinion: $("#CatalogoTipoOpinion").val(),
+                   IdArea: $("#CatalogoDeAreas").val(),
+                     },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                     $("#CatlogoCausaAsunto").append('<option value="' + state.IdCausaAsunto + '">'
+                                                                       + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+</script>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoTipoOpinion").change(function () {
+            $("#CatlogoCausaAsunto").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostGetCausaAsuntoEdicion")', // we are calling json method
+               dataType: 'json',
+               data: { idTipoOpinion: $("#CatalogoTipoOpinion").val(),
+                   IdArea: $("#CatalogoDeAreas").val(),
+                     },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                     $("#CatlogoCausaAsunto").append('<option value="' + state.IdCausaAsunto + '">'
+                                                                       + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+</script>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoDeAreas").change(function () {
+              $("#CatalogoServicioHecho").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostServicioHechosEdicion")', // we are calling json method
+               dataType: 'json',
+               data: {
+                   IdArea: $("#CatalogoDeAreas").val(),
+               },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                      $("#CatalogoServicioHecho").append('<option value="' + state.IdServicioHecho + '">'
+                                                                           + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+</script>
+
+}
+
+
+
+

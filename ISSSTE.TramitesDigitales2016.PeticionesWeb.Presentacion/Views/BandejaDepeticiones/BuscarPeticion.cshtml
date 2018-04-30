@@ -1,0 +1,576 @@
+﻿@model ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion.Models.ViewModelBuscarPeticion
+
+@{
+   ViewBag.Title = "BuscarPeticion";
+   Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+@using (Html.BeginForm("BuscarPeticion", "BandejaDepeticiones", FormMethod.Post))
+{
+   <div class="container-fluid">
+      <div class="row">
+         <form name="requestForm" role="form" novalidate>
+            <section>
+               <br />
+               <div class="row form-group">
+                  <div class="row">
+                     <div class="col-md-12">
+                        @if (@ViewBag.escondevalidar != 1)
+                        {
+                        <div class="alert alert-danger alert-dismissible col-md-12" id="divError">
+                           <button type="button" class="close" data-dissmiss="alert" aria-label="Close" onclick="oculta()">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                           <div>
+                              <span id="spanError">Por favor ingrese al menos un campo</span>
+                           </div>
+                        </div>
+                        }
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <button class="btn btn-primary" id="enviarSol" name="enviarSol" type="submit">
+                        <span>Buscar solicitud</span>
+                        <span class="glyphicon glyphicon-search"></span>
+                     </button>
+                     <a href="@Url.Action("BandejaIndex")" class="btn btn-danger">
+                        <span>Cancelar</span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                     </a>
+                  </div>
+                  <div class="col-lg-6">
+                  </div>
+               </div>
+            </section>
+            <section>
+               <div class="row">
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="FoliTxt">Folio:</label>
+                     <input type="text" class="form-control" id="FoliotTxt"
+                            name="FoliotTxt" placeholder="Ingresa tu Folio" />
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label>Fecha de Captura Inicio:</label>
+                     <div class="input-group date">
+                        <span class="input-group-addon" id="datepickerSpanFechaRegistro">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        @Html.EditorFor(model => model.Detalle_peticionBusqueda.FechaRegistro,
+                                                new
+                                                {
+                                                   htmlAttributes = new
+                                                   {
+                                                      @class = "form-control",
+                                                      @id = "startDateFechaRegistro",
+                                                      @style = "background:white; width:83%;",
+                                                      @Placeholder = "dd/mm/aaaa",
+                                                      @readonly = "readonly"
+                                                   }
+                                                })
+                     </div>
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.FechaRegistro, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label>Fecha de Captura Fin:</label>
+                     <div class="input-group date">
+                        <span class="input-group-addon" id="datepickerSpanFechaRegistroFin">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        @Html.EditorFor(model => model.Detalle_peticionBusqueda.FechaRegistroFin,
+                                                new
+                                                {
+                                                   htmlAttributes = new
+                                                   {
+                                                      @class = "form-control",
+                                                      @id = "startDateFechaRegistroFin",
+                                                      @Placeholder = "dd/mm/aaaa",
+                                                      @style = "background:white; width:83%;",
+                                                      @readonly = "readonly"
+                                                   }
+                                                })
+                     </div>
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.FechaRegistroFin, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="EstatusPeticionTxt">Estatus de la petición:</label>
+                     @Html.DropDownListFor(model => model.CataloEstatus.IdEstatusInterno,
+                                                  (IEnumerable<SelectListItem>)ViewBag.CatalogoEstatusInternoRdn, new { @class = "form-control" })
+                  </div>
+                   <div class="form-group col-md-4">                       
+                       <label class="control-label" for="EstatusPeticionTxt">Peticiones asignadas al operador:</label>
+                       <input type="checkbox" id="CkxHabilitaOperadores" name="CkxHabilitaOperadores" onclick="EnableDisableTextBox(this)" />   
+                       @Html.Hidden("ID")
+                       <input type="text" name="TxtOperadoresUps" list="Operadores" class="form-control" data-toggle="dropdown" disabled id="TxtOperadoresUps"
+                              placeholder="Seleccione"  />
+                       <datalist id="Operadores" style="white-space:normal; text-overflow:ellipsis;">
+                           @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.CatalogoListaUsuariosQueCompartenUPS)
+                           {
+                               <option value="@item.Text" data-id="@item.Value" />
+                           }
+                       </datalist>
+                  </div>
+
+
+               </div>
+            </section>
+
+            <section>
+               <div class="form-group col-md-12">
+                  <h3>Datos del peticionario</h3>
+                  <hr class="Negro1 bottom-buffer top-buffer" />
+               </div>
+               <div class="row">
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="curpPetTxt">Clave única de registro de población:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CurpPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.CurpPeticionario, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="rfcPetTxt">Registro federal de contribuyente:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.RfcPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.RfcPeticionario, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="nombreTxt">Nombre(s):</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.NombrePeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.NombrePeticionario, "", new { @class = "text-danger" })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="apPaternoTxt">Apellido paterno:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.ApePaternoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.ApePaternoPeticionario, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="apMaternoTxt">Apellido materno:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.ApeMaternoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.ApeMaternoPeticionario, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="sexoSlct">Sexo:</label>
+                     @Html.DropDownListFor(model => model.CataloGenero.IdGenero,
+                                                  (IEnumerable<SelectListItem>)ViewBag.IdGenero, new { @class = "form-control" })
+
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="tipoDerSlct">Tipo de derechohabiente:</label>
+                     @*@Html.DropDownList("IdTipoDerechohabiente", null, htmlAttributes: new { @class = "form-control" })*@
+                     @Html.DropDownListFor(model => model.CatalogoTiposDerhabiente.IdTipoDerechohabiente,
+                                                  (IEnumerable<SelectListItem>)ViewBag.IdTipoDerechohabiente, new { @class = "form-control" })
+
+
+                  </div>
+               </div>
+            </section>
+            <section>
+               <div class="form-group col-md-12">
+                  <h3>Datos de contacto</h3>
+                  <hr class="Negro1 bottom-buffer top-buffer" />
+               </div>
+               <div class="row">
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="codPostTxt">Código postal:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CPPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="estadoSlct">Estado:</label>
+                     @*@Html.DropDownList("CatalogoEstado", null, htmlAttributes: new { @class = "form-control" })*@
+                     @Html.DropDownListFor(model => model.CatalogoEstado.IdEstado,
+                                                  (IEnumerable<SelectListItem>)ViewBag.CatalogoEstado, new { @class = "form-control" })
+
+
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="municipioSlct">Municipio o alcaldía:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.MpioPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="coloniaTxt">Colonia:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.ColoniaPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="calleTxt">Calle:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CallePeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="numExtTxt">Número exterior:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.NumeroExteriorPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="numIntTxt">Número interior:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.NumeroInteriorPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="ladaTxt">Lada:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.LadaPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="telefTxt">Teléfono fijo:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.TelefonoFijoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="celTxt">Teléfono móvil:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.TelefonoMovilPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label" for="emailTxt">Correo electrónico:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CorreoElectronicoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+
+               </div>
+            </section>
+            <section>
+               <div class="form-group col-md-12">
+                  <h3>Datos del afectado</h3>
+                  <hr class="Negro1 bottom-buffer top-buffer" />
+               </div>
+               <div class="row">
+                  <div class="form-group col-md-4">
+                     <label for="curpAfectadoTxt" class="control-label">CURP del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CurpAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="rfcAfectadoTxt" class="control-label">RFC del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.RfcAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="afecNomTxt" class="control-label">Nombre(s) del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.NombreAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label for="afecApPatTxt" class="control-label">Apellido paterno del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.ApePaternoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="afecApMatTxt" class="control-label">Apellido materno del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.ApeMaternoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="afecSexoSlct" class="control-label">Sexo del afectado:</label>
+                     @Html.DropDownListFor(model => model.CataloGeneroAfectado.IdGenero,
+                                                  (IEnumerable<SelectListItem>)ViewBag.IdGenero, new { @class = "form-control" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="afecTipoDerSlct" class="control-label">Tipo de derechohabiente:</label>
+                     @Html.DropDownListFor(model => model.CatalogoTiposDerhabienteAfectado.IdTipoDerechohabiente,
+                                                  (IEnumerable<SelectListItem>)ViewBag.IdTipoDerechohabiente, new { @class = "form-control" })
+
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="afecTelTxt" class="control-label">Teléfono del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.TelefonoFijoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label for="afecEmailTxt" class="control-label">Correo electrónico del afectado:</label>
+                     @Html.EditorFor(model => model.Detalle_peticionBusqueda.CorreoElectronicoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+                  </div>
+               </div>
+            </section>
+            <section>
+               <div class="form-group col-md-12">
+                  <h3>Descripción de la petición</h3>
+                  <hr class="Negro1 bottom-buffer top-buffer" />
+               </div>
+               <div class="row">
+                  <div class="form-group col-md-4">
+                     <label for="areaPeticionSlct" class="control-label">Área a donde corresponde la petición:</label>
+                     @Html.DropDownList("CatalogoDeAreas",
+                                                  (IEnumerable<SelectListItem>)ViewBag.CatalogoDeAreas, new { @class = "form-control" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="delPeticionSlct" class="control-label">Delegación/Hospitales:</label>
+                     @Html.DropDownList("CatalogoDelegacionHospital",
+                                                  (IEnumerable<SelectListItem>)ViewBag.CatalogoDelegacionHospital, new { @class = "form-control" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="unidadPeticionSlct" class="control-label">Nombre de la unidad:</label>
+                     @Html.DropDownList("CatalogoUnidadPrestServ",
+                                new SelectList(string.Empty, "IdUnidadAdministrativa", "Nombre"), "Seleccione",
+                                new { @class = "form-control" }
+                              )
+                  </div>
+
+                  <div class="form-group col-md-4">
+                     <label for="opinionPetSlct" class="control-label">Tipo de opinión:</label>
+                     @Html.DropDownList("CatalogoTipoOpinion",
+                     (IEnumerable<SelectListItem>)ViewBag.CatalogoTipoOpinion, new { @class = "form-control" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="asuntoPetSlct" class="control-label">Causa del asunto:</label>
+                     @*@Html.DropDownListFor(model => model.CatalogoCausaAsunto.IdCausaAsunto,
+                        (IEnumerable<SelectListItem>)ViewBag.CatalogoCausasAsunto, new { @class = "form-control" })*@
+                     @Html.DropDownList("CatlogoCausaAsunto",
+                                new SelectList(string.Empty, "IdCausaAsunto", "Nombre"), "Seleccione",
+                                new { @class = "form-control" }
+                              )
+                  </div>
+                  @*<div class="form-group col-md-4">
+                         <label for="hechosdatePicker" class="control-label">Fecha de los hechos:</label>
+                         @Html.EditorFor(model => model.Detalle_peticionBusqueda.FechaHechos, new { htmlAttributes = new { @class = "form-control" } })
+                     </div>*@
+                  <div class="form-group col-md-4">
+                     <label>Fecha de los hechos:</label>
+                     <div class="input-group date">
+                        <span class="input-group-addon" id="datepickerSpanFechaHechos">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        @Html.EditorFor(model => model.Detalle_peticionBusqueda.FechaHechos,
+                                                new
+                                                {
+                                                   htmlAttributes = new
+                                                   {
+                                                      @class = "form-control",
+                                                      @id = "startDate",
+                                                      @style = "background:white; width:83%;",
+                                                      @Placeholder = "dd/mm/aaaa",
+                                                      @readonly = "readonly"
+                                                   }
+                                                })
+                     </div>
+                     @Html.ValidationMessageFor(model => model.Detalle_peticionBusqueda.FechaHechos, "", new { @class = "text-danger" })
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label for="servicioHechoSlct" class="control-label">Servicios donde ocurrieron los hechos:</label>
+                     @*@Html.DropDownListFor(model => model.CatalogoServicioHecho.IdServicioHecho,
+                                                  (IEnumerable<SelectListItem>)ViewBag.CatalogoServHecho, new { @class = "form-control" })*@
+
+                      @Html.DropDownList("CatalogoServicioHecho",
+                                new SelectList(string.Empty, "IdServicioHecho", "Nombre"), "Seleccione",
+                                new { @class = "form-control" }
+                              )
+                  </div>
+                   <div class="form-group col-xs-12 col-md-12 col-lg-12">
+                       <label for="descTxtArea" class="control-label">Descripción:</label>
+                       @Html.EditorFor(model => model.Detalle_peticionBusqueda.Descripcion,
+                       new { htmlAttributes = new
+                       {
+                           @class = "form-control",
+                           @style = "max-width:95%; height:130px; overflow:auto;resize:none; cursor: default;"
+                       } })
+                   </div>
+               </div>
+            </section>
+         </form>
+      </div>
+   </div>
+}
+
+@section Scripts
+{
+   <script src="~/Scripts/jquery.validate.js"></script>
+   <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+   @Scripts.Render("~/bundles/jQureyTablero")
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoDeAreas").change(function () {
+            $("#CatlogoCausaAsunto").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostGetCausaAsunto")', // we are calling json method
+               dataType: 'json',
+               data: { idTipoOpinion: $("#CatalogoTipoOpinion").val(),
+                   IdArea: $("#CatalogoDeAreas").val(),
+                     },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                     $("#CatlogoCausaAsunto").append('<option value="' + state.IdCausaAsunto + '">'
+                                                                       + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+</script>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoTipoOpinion").change(function () {
+            $("#CatlogoCausaAsunto").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostGetCausaAsunto")', // we are calling json method
+               dataType: 'json',
+               data: { idTipoOpinion: $("#CatalogoTipoOpinion").val(),
+                   IdArea: $("#CatalogoDeAreas").val(),
+                     },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                     $("#CatlogoCausaAsunto").append('<option value="' + state.IdCausaAsunto + '">'
+                                                                       + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+   </script>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+         //Dropdownlist Selectedchange event
+          $("#CatalogoDeAreas").change(function () {
+              $("#CatalogoServicioHecho").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostServicioHechos")', // we are calling json method
+               dataType: 'json',
+               data: {
+                   IdArea: $("#CatalogoDeAreas").val(),
+               },
+               // here we are get value of selected country and passing same value
+               success: function (states) {
+                  // states contains the JSON formatted list
+                  // of states passed from the controller
+                  $.each(states, function (i, state) {
+                      $("#CatalogoServicioHecho").append('<option value="' + state.IdServicioHecho + '">'
+                                                                           + state.Nombre + '</option>');
+                     // here we are adding option for States
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+   </script>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+          $("#CatalogoDelegacionHospital").change(function () {
+            $("#CatalogoUnidadPrestServ").empty();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("PostUnidPrestServ")',
+               dataType: 'json',
+               data: {
+                      IdUnidadAdministrativa: $("#CatalogoDelegacionHospital").val()
+                     },
+               success: function (states) {
+                  $.each(states, function (i, state) {
+                     $("#CatalogoUnidadPrestServ").append('<option value="' + state.IdUnidadAdministrativa + '">'
+                                                                            + state.Nombre + '</option>');
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al cargar el Catalogo Causa Asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+</script>
+
+
+   <script type="text/javascript">
+      $("#li4").ready(function () {
+         $("#liBandeja").addClass('active');
+         $("#liBitacora").removeClass('active');
+         $("#liDias").removeClass('active');
+         $("#liReportes").removeClass('active');
+         $("#liTablero").removeClass('active');
+      });
+      function oculta() {
+         document.getElementById('divError').hidden = true;
+      }
+   </script>
+
+   <script>
+    $("#TxtOperadoresUps").on('change', function () {
+        var id = $("option").filter("[value='" + $("#TxtOperadoresUps").val() + "']").data("id");
+        $("[name='ID']").val(id);
+    });
+   </script>
+
+    <script type="text/javascript">
+        function EnableDisableTextBox(chkHabilitaDesabilita) {
+            var TxtOperadoresUps = document.getElementById("TxtOperadoresUps");
+                TxtOperadoresUps.disabled = chkHabilitaDesabilita.checked ? false : true;
+            if (!TxtOperadoresUps.disabled) {
+                TxtOperadoresUps.focus();
+            }
+        }
+    </script>
+
+
+
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+   $(function () {
+      $("#enviarSol").click(function () {
+         $.ajaxSetup({
+            global: false,
+            type: "GET",
+            url: "",
+            beforeSend: function () {
+               $(".modal").show();
+            },
+            complete: function () {
+               $(".modal").hide();
+            }
+         });
+         $.ajax({
+            data: "{}",
+            success: function (r) {
+               //$("#lblIPAddress").html("IP Address: ");
+            }
+         });
+      });
+   });
+</script>
+
+<span id="lblIPAddress"></span>
+<div class="modal" id="pleaseWaitDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="dialog-container">
+         <div class="dialog-image">
+            <div class="dialog-message" style="background-color:#ffffff; height:60px;" align="center">
+               <h2 style="padding-top:10px">
+                  <img src="data:image/gif;base64,R0lGODlhGAAYAJECAP///5mZmf///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAGAAYAAACQJQvAGgRDI1SyLnI5jr2YUQx10eW5hmeB6Wpkja5SZy6tYzn+g5uMhuzwW6lFtF05CkhxGQm+HKuoDPplOlDFAAAIfkEBQoAAgAsFAAGAAQABAAAAgVUYqeXUgAh+QQFCgACACwUAA4ABAAEAAACBVRip5dSACH5BAUKAAIALA4AFAAEAAQAAAIFVGKnl1IAIfkEBQoAAgAsBgAUAAQABAAAAgVUYqeXUgAh+QQFCgACACwAAA4ABAAEAAACBVRip5dSACH5BAUKAAIALAAABgAEAAQAAAIFVGKnl1IAIfkECQoAAgAsBgAAAAQABAAAAgVUYqeXUgAh+QQJCgACACwAAAAAGAAYAAACJZQvEWgADI1SyLnI5jr2YUQx10eW5omm6sq27gvH8kzX9o3ndAEAIfkECQoAAgAsAAAAABgAGAAAAkCULxFoAAyNUsi5yOY69mFEMddHluYZntyjqY3Vul2yucJo5/rOQ6lLiak0QtSEpvv1lh8l0lQsYqJHaO3gFBQAACH5BAkKAAIALAAAAAAYABgAAAJAlC8RaAAMjVLIucjmOvZhRDHXR5bmGZ7co6mN1bpdsrnCaOf6zkOpzJrYOjHV7Gf09JYlJA0lPBQ/0ym1JsUeCgAh+QQJCgACACwAAAAAGAAYAAACQJQvEWgADI1SyLnI5jr2YUQx10eW5hme3KOpjdW6XbK5wmjn+s5Dqcya2Dox1exn9PSWJeRNSSo+cR/pzOSkHgoAIfkECQoAAgAsAAAAABgAGAAAAkCULxFoAAyNUsi5yOY69mFEMddHluYZntyjqY3Vul2yucJo5/rOQ6nMmtg6MdXsZ/T0liXc6jRbOTHR15SqfEIKACH5BAkKAAIALAAAAAAYABgAAAJAlC8RaAAMjVLIucjmOvZhRDHXR5bmGZ7co6mN1bpdsrnCaOf6zkO4/JgBOz/TrHhC9pYRpNJnqURLwtdT5JFGCgAh+QQJCgACACwAAAAAGAAYAAACPpQvEWgADI1SyLnI5jr2YUQx10eW5jme3NOpTWe5Qpu6tYzn+l558tWywW4lmk/IS6KOr2UtSILOYiYiUVAAADs=">
+                  <span class="ms-accentText dialog-accentText">
+                     &nbsp; <font color="#000000">Trabajando en ello...</font>
+                  </span>
+               </h2>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+<style type="text/css">
+   .modal {
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+      filter: alpha(opacity=60);
+      opacity: 0.6;
+   }
+</style>

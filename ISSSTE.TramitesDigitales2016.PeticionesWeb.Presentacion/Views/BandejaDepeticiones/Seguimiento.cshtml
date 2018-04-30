@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "Seguimiento";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+<div class="row">
+   <div class="col-sm-12">
+      <h2>Seguimiento</h2>
+       <hr class="Negro1"/>
+   </div>
+</div>
+
+@*<nav class="navbar navbar-default">*@
+<div class="row">
+   <div class="col-md-12">
+      <div class="container-fluid">
+         <ul class="nav nav-tabs">
+            <li role="presentation" @ViewBag.OcultaTab>
+               @Html.ActionLink("Detalle de la petición", "MenuDetalle")
+            </li>
+
+            <li role="presentation" class="active" @ViewBag.OcultaTab>
+               @Html.ActionLink("Seguimiento", "Seguimiento")
+            </li>
+            <li role="presentation" @ViewBag.OcultaTab>
+               @Html.ActionLink("Agregar personal", "PersonalInvolucrado")
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div class="row">
+    <br />
+</div>
+@*</nav>*@
+
+<body ng-app="historyForm" ng-controller="HistoryController as history" style="max-width:100%; min-width:480px" ng-cloak>
+    <div ng-disabled="history.IdEstatusInterno != 2 || history.IdEstatusInterno != 3" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Seguimiento a petición</h4>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible col-md-12" ng-if="!history.msgError == undefined || !history.msgError == ''" >
+                    <button type="button" class="close" data-dissmiss="alert" ng-click="history.resetError()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div>
+                        <span id="spanError">{{history.msgError}}</span>
+                    </div>
+                </div>
+               <div class="row">
+                  <br />
+               </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <form id="FormDescripcion">
+                            <div class="form-group col-md-3">
+                                <label for="dateHistTxt" class="control-label">Fecha de ingreso:</label>
+                                <input type="text" id="dateHistTxt" class="form-control" value="@DateTime.Now.ToShortDateString()" readonly />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="userHistTxt" class="control-label">Usuario:</label>
+                                <input type="text" id="userHistTxt" class="form-control" readonly ng-model="history.record.historyUserName" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="descrHistTxt" class="control-label">Seguimiento*:</label>
+                                <textarea ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" name="descrTxt" maxlength="1000" id="descrTxt" required style="resize: none; max-width: 100%;" class="form-control" placeholder="Agrega el detalle del seguimiento." ng-model="history.record.historyDescription" rows="2"></textarea>
+                                <span id="ValDesr" style="color:red; font-size: small" hidden>Falta agregar Seguimiento</span>
+                            </div>
+                        </form>
+
+                        <table class="table table-hover table-striped table-bordered" >
+                            <thead>
+                                <tr style="color:white; background-color:#4D7DA6;">
+                                    <th ng-if="history.record.historyIdRol !=3" class="col-md-1"></th>
+                                    <th class="col-md-2">Fecha ingreso</th>
+                                    <th class="col-md-2">Usuario</th>
+                                    <th class="col-md-7">Seguimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="historyDetail in history.recordsList">
+                                    <td ng-if="history.record.historyIdRol !=3">
+                                        <input type="checkbox" ng-model="historyDetail.selected" ng-click="history.seekForClick()" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" />
+                                    </td>
+                                    <td>
+                                        <span style="display: inline-block; word-break:break-all;">{{historyDetail.FechaRegistro}}</span>
+                                    </td>
+                                    <td>
+                                        <span style="display: inline-block; word-break:break-all;">{{historyDetail.Username}}</span>
+                                    </td>
+                                    <td>
+                                        <span style="display: inline-block; word-break:break-all;">{{historyDetail.Comentarios}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-group col-md-12">
+                            <button ng-if="history.record.historyIdRol !=3" ng-hide="!history.recordsList.length" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false) || history.enabledButton == false" type="button" style="margin-right: 10px;" class="btn btn-danger btn-sm pull-left" ng-click="history.removeRecords()">Eliminar Seleccionado</button>
+                            <button type="button" class="btn btn-default btn-sm pull-left" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" ng-click="history.addNew(history.record)">Agregar Seguimiento</button>
+                            @*@Html.ActionLink("Agregar Seguimiento", "InsertarSeguimientoOperador","BandejaDepeticiones", new {  }, new { @class = "btn btn-primary", @style = "color:#FFF" })*@
+                            <!--<button type="button" class="btn btn-success pull-right" ng-disabled="!history.recordsList.length" ng-click="history.closeRequest()">Concluir petición</button>-->
+                            <!--Modal-->
+                            <div class="modal fade" id="modalConcluirPeticion" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header modalBody">
+                                            <!--<a href="#" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>-->
+                                            <h4 class="modal-title">Conclusión de la petición.</h4>
+                                        </div>
+                                        <div class="modal-body modalBody">
+                                            <p>¿Desea concluir la petición?</p>
+                                        </div>
+                                        <div class="modal-footer modalBodyBtn">
+                                            <!--El boton "no", debera cerrar el modal-->
+                                            <button type="button" class="btn btn-danger myBtnModal" data-dismiss="modal">No</button>
+                                            <!--En ésta parte, se coloca el boton con la funcionalidad de angular para concluir la petición-->
+                                            <button type="button" class="btn btn-primary myBtnModal" ng-click="history.closeRequest()">Si</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--EndModal-->
+                        </div>
+                       <div>
+                          <br/>
+                       </div>
+                        <div class="row" style="padding-top:20px;">
+                            @*<button id="testButton">continuar</button>*@
+                            <form id="uploader">
+                                <div class="form-group col-md-5">
+                                    @*<input type="file" id="Archivo" name="Archivo" class="glyphicon-file" />*@
+                                    <input style="max-width:100%" id="fileInput" type="file" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" onchange="CambiaArchivo()">
+                                    <span id="ValArchivoExt" style="color:red; font-size: small" hidden>Tipo de archivo no permitido</span>
+                                    <span id="ValArchivoTam" style="color:red; font-size: small" hidden>El tamaño del archivo excede los 20 megas</span>
+                                </div>
+                                <div class="form-group col-md-7">
+                                    <input id="btnFile" disabled="disabled" type="submit" class="btn btn-default btn-sm pull-left" value="Guardar archivo" ng-click="history.ActualizarTabla()" />
+                                </div>
+                            </form>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead id="TablaArchivo">
+                                    <tr style="color:white; background-color:#4D7DA6;">
+                                        <th ng-if="history.record.historyIdRol !=3" class="col-md-1"></th>
+                                        <th class="col-md-8">Archivo</th>
+                                        <th class="col-md-2">Fecha</th>
+                                        <th ng-if="!((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" class="col-md-1">Descargar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="historyDetailFile in history.recordsListFile">
+                                        <td ng-if="history.record.historyIdRol !=3">
+                                            <input ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" type="checkbox" ng-model="historyDetailFile.selectedfile" ng-click="history.seekForClickfile()" />
+                                        </td>
+                                        <td>
+                                            <span style="display: inline-block; word-break:break-all;">{{historyDetailFile.NombreArchivo}}</span>
+                                        </td>
+                                        <td>{{historyDetailFile.FechaRegistro}}</td>
+                                        <td ng-if="!((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)">
+                                            <a ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false)" class="btn btn-primary" ng-href="@Url.Action("Download", "BandejaDePeticiones")?NombreArchivo={{historyDetailFile.NombreArchivo}}"><span>Descarga </span><span class="glyphicon glyphicon-download"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-group col-md-12">
+                                <button ng-if="history.record.historyIdRol !=3" ng-hide="!history.recordsListFile.length" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false) || history.enabledButtonFile == false" type="button" class="btn btn-danger btn-sm pull-left" ng-click="history.removeRecordsFile()">Eliminar Seleccionado</button>
+                                @*@Html.ActionLink("Agregar Seguimiento", "InsertarSeguimientoOperador","BandejaDepeticiones", new {  }, new { @class = "btn btn-primary", @style = "color:#FFF" })*@
+                                <button type="button" ng-disabled="((history.IdEstatusInterno != 2 && history.IdEstatusInterno != 3) || history.AsigPeticion == false) || !history.recordsList.length" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalConcluirPeticion">Concluir petición</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@section Scripts{
+   <script src="~/Scripts/history-form/history-form.event.js"></script>
+   <script type="text/javascript">
+         $(document).ready(function () {
+               $("#liBandeja").addClass('active');
+               $("#liBitacora").removeClass('active');
+               $("#liDias").removeClass('active');
+               $("#liReportes").removeClass('active');
+               $("#liTablero").removeClass('active');
+         });
+   </script>
+}
+

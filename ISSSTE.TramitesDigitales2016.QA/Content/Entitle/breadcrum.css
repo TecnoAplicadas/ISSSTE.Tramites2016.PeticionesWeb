@@ -1,0 +1,128 @@
+
+.containerporb {
+    width: 1012px;
+    margin: 0 auto;
+    padding: 0px 15px;
+}
+
+.col-min {
+    width: 5%;
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.brWizard {
+    margin-top: 40px;
+}
+
+.brWizard {
+    padding: 0 0 10px 0;
+}
+
+.brWizard.fixed {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding-left: 8%;
+    padding-right: 8%;
+    margin-top: 45px;
+    z-index: 100;
+    background-color: #FFF;
+    width: 100%;
+}
+
+.brWizard > .brWizard-step {
+    padding: 0;
+    position: relative;
+}
+
+.brWizard-dot {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    display: block;
+    background: #8DB3DD;
+    top: 40px;
+    left: 0%;
+    margin-top: -35px;
+    margin-left: 0px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2em;
+    color: #FFF;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.progress {
+    position: relative;
+    border-radius: 0px;
+    height: 10px;
+    box-shadow: none;
+    margin: 20px 0;
+    background-color: #DBDBD6;
+}
+
+.progress > .progress-bar {
+    width: 0px;
+    box-shadow: none;
+    background: #8DB3DD;
+}
+
+.brWizard-step.complete > .progress > .progress-bar {
+    width: 100%;
+}
+
+.brWizard-step.active > .progress > .progress-bar {
+    width: 0%;
+}
+
+.brWizard-step:first-child.active > .progress > .progress-bar {
+    width: 0%;
+}
+
+.brWizard-step.active .brWizard-dot {
+    background-color: #2276D7;
+}
+
+.brWizard-step.disabled .brWizard-dot {
+
+}
+
+.brWizard-step.complete .brWizard-dot {
+    cursor: pointer;
+    cursor: hand;
+}
+.brWizard-dot:hover {
+    color: #f2f0e7;
+}
+
+.brWizard-step:last-child.active > .progress > .progress-bar {
+    width: 100%;
+}
+
+.brWizard-step.disabled > .brWizard-dot {
+    background-color: #DBDBD6;
+}
+
+.brWizard-step.disabled > .brWizard-dot:after {
+    opacity: 0;
+}
+
+.brWizard-step:first-child > .progress {
+    left: 0%;
+    width: 100%;
+}
+
+.brWizard-step:last-child > .progress {
+    width: 0%;
+}
+
+.brWizard-step.disabled a.brWizard-dot {
+    /*pointer-events: none;*/
+    cursor: default;
+}
+

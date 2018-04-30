@@ -1,0 +1,269 @@
+﻿.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+ color: #333 !important;
+  background-color: #f5f5f5 !important;
+  border-color: #ddd !important;
+}
+
+.well.abl-well{
+    background-color: #ffffff !important;
+}
+
+.badge{
+    font-size: 16px !important;
+}
+
+a{
+    text-decoration:none !important;
+}
+
+.ui.datepicker{
+    background-color:#F6F6F6 !important;
+}
+
+#feedLoading {
+	position: absolute;
+    z-index: 10;
+	top:30%;
+	width:90% !important;
+	text-align: center;
+	font-size: 4em;
+	color:white;
+	text-shadow: 2px 2px 2px #021124;
+}
+
+#veil {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:3000px;
+    z-index: 5;
+	width:100%;
+	cursor: not-allowed;
+	filter: alpha(opacity=60);
+	opacity: 0.6;
+	background: #000000 /*url(http://www.wingo.com/angular/AngularShieldLogo.png)*/ no-repeat center;
+}
+
+body{
+
+}
+
+
+form.ng-submitted .ng-invalid,
+form.ng-submitted .ng-invalid-required,
+form.ng-submitted .ng-invalid-pattern
+  {
+    border-color: #e05c5c;
+    color: #e05c5c;
+    box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+    -webkit-box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+} 
+/*.simple-form input.ng-invalid-required,.simple-form input.ng-invalid,.simple-form input.ng-invalid-pattern{
+    border-color: #e05c5c;
+    color: #e05c5c;
+    box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+    -webkit-box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+}*/
+
+
+
+/*.flecha{
+    background-color: #4A90E2 !important;
+}*/
+
+/*.btn-default{
+    width: 100%;  border-radius: 10px;
+}*/
+
+
+/*.col-xs-4{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}*/
+
+/*.col-xs-8{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}*/
+
+.has-error{
+    color:#c7254e;
+    font-size:16px;
+    font-weight:100;
+}
+
+.fill-form {
+    border-bottom:1px;
+    border-bottom-style: solid;
+    border-color:#ddd;
+}
+
+.pad-h-form {
+    display: inline-block;
+    vertical-align: bottom;
+    float: none;
+    padding-top: 45px;
+}
+
+
+
+    .breadcrumb-table {
+        width: 100%;
+        list-style: none;
+        display: inline-table;
+        padding: 1px;
+    }
+
+    #crumbs ul li {
+        display: inline;
+    }
+
+    .breadcrumb-table td a {
+        display: block;
+        float: left;
+        height: 60px;
+        background: #EEEEEE;
+        text-align: center;
+        padding: 10px 10px 10px 10px;
+        position: relative;
+        margin: 0 10px 0 2px;
+        font-size: 16px;
+        width: 100%;
+        text-decoration: none;
+        color: #000000;
+    }
+
+
+
+    .breadcrumb-table td a:after {
+        content: "";
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 10px solid #EEEEEE;
+        position: absolute;
+        right: -9px;
+        top: 0;
+        z-index: 1;
+    }
+
+    .breadcrumb-table td a.special:after {
+        content: "";
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 10px solid #4A90E2;
+        position: absolute;
+        right: -9px;
+        top: 0;
+        z-index: 1;
+        cursor: default;
+    }
+
+    .breadcrumb-table td a:before {
+        content: "";
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 10px solid #FFFFFF;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .breadcrumb-table td:first-child a {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        padding-left:10px;
+    }
+
+    .breadcrumb-table td:first-child a:before {
+        display: none;
+    }
+
+    .breadcrumb-table td:last-child a {
+       
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+        .breadcrumb-table td:last-child a:after {
+            display: none;
+        }
+
+    a.not {
+        cursor: not-allowed;
+    }
+
+
+    
+.ui-tooltip {
+	padding: 8px !important;
+	position: absolute !important;
+	z-index: 9999 !important;
+	max-width: 300px !important;
+	-webkit-box-shadow: 0 0 5px #000 !important;
+	box-shadow: 0 0 5px #000 !important;
+    color:white !important;
+    background:#000 !important;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    
+    z-index: 1070;
+    display: block;
+    visibility: visible;
+    font-size: 14px!important;
+    line-height: 1.4;
+    opacity: 9;
+    filter: alpha(opacity=90);
+}
+body .ui-tooltip {
+	border-width: 1px !important;
+    border-color: #545454;
+}
+.datepicker-group .form-control, .has-feedback .form-control {
+    padding-right: 48.75px;
+}
+.datepicker-group, .has-feedback {
+    position: relative;
+}
+.datepicker-group .has-feedback label~.glyphicon, .datepicker-group label~.form-control-feedback, .datepicker-group label~.glyphicon, .has-feedback label~.form-control-feedback {
+    top: 30px;
+}
+.datepicker-group .glyphicon {
+    color: #919191;
+}
+.datepicker-group .glyphicon, .form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    width: 39px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 49%;
+    color: black;
+}
+
+form.ng-submitted .ng-invalid,
+form.ng-submitted .ng-invalid-required,
+form.ng-submitted .ng-invalid-pattern
+  {
+    border-color: #e05c5c;
+    color: #e05c5c;
+    box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+    -webkit-box-shadow: 0 0 2px 2px rgba(221, 134, 134, 0.4);
+} 
+
+.credentials {
+    background: white;
+    border: 2px solid #eeeeee;
+    border-radius: 5px 5px 5px 5px;
+    margin: 20px 0 0px 0;
+    moz-border-radius: 5px 5px 5px 5px;
+    padding: 15px 15px;
+    position: relative;
+    webkit-border-radius: 5px 5px 5px 5px;
+}

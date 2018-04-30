@@ -1,0 +1,65 @@
+﻿<div data-ng-controller="reviewController as vm" data-ng-init="vm.initReview()">
+    <div class="alert alert-success hidden marg-T15px" id="exito">
+        <strong>¡Felicidades!</strong>
+        Tu cotización ha sido generada ahora puedes descargarla.
+    </div>
+
+    <!-- Datos generales -->
+    <div class="row">
+
+
+        <div class="col-xs-12 ">
+            <h2 class="marg-B20px">Cotización</h2>
+            <hr class="red">
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th><os-p>Producto</os-p></th>
+                        <th><os-p>Precio ISSSTE</os-p></th>
+                        <th><os-p>Precio público</os-p></th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr data-ng-repeat="rq in vm.quote.QuotationItems">
+
+                        <th scope="row">{{$index + 1}}</th>
+                        <td><os-p style="text-transform: capitalize" >{{rq.Description | lowercase }}</os-p></td>
+                        <td><os-p class="pIssste">{{rq.EntitlePrice | currency: "$"}}</os-p></td>
+                        <td><os-p class="ppublico">{{rq.PublicPrice | currency: "$"}}</os-p></td>
+
+                    </tr>
+
+                    <tr>
+                        <th scope="row">-</th>
+                        <td><os-p>Total</os-p></td>
+                        <td><os-p class="pIssste">{{vm.quote.EntitleTotal | currency: "$"}}</os-p></td>
+                        <td><os-p class="ppublico">{{vm.quote.PublicTotal | currency: "$"}}</os-p></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+            <p class="text-right col-if-12 col-md-12 marg-B30px marg-T30px">
+                <a href="#{{nc.requestsUrl}}" class="btn btn-default vertical-buffer" id="back">Ver mis cotizaciones</a>
+                <a onclick="uid_call('ISSSTE.Velacion.Cotizacion', 'pdf')" data-ng-click="vm.getReport(vm.idQuote)" ng-href="{{vm.reportUrl}}" target="_blank" class="btn btn-primary btnconfirmar" id="btnCotizar">Descargar</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    //Se agrega el Breadcrumbs Grafica Base
+    $('#navinicio').removeClass("active");
+    $('#navabout').removeClass("hidden");
+    $('#navrequest').removeClass("hidden");
+
+</script>
+

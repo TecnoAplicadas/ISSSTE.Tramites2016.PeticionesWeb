@@ -1,0 +1,249 @@
+﻿@model ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion.Models.ViewModelReporteTipoOpinionCaptacion
+
+@{
+   ViewBag.Title = "Reportes";
+   Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+<div class="row">
+   <div class="col-md-12">
+      <h2>Reportes: peticiones por tipo de opinión, peticiones por delegación y tipo opinión más ejercida.</h2>
+      <hr class="Negro1" />
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-12">
+      @if (ViewBag.ErrorMessage != null)
+      {
+         <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewBag.ErrorMessage
+         </div>
+      }
+      @if (ViewBag.InfoMessage != null)
+      {
+         <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewBag.InfoMessage
+         </div>
+      }
+      @if (ViewBag.WarningMessage != null)
+      {
+         <div class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            @ViewBag.WarningMessage
+         </div>
+      }
+   </div>
+</div>
+<label id="titulo"></label>
+<div class="row">
+   <div class="col-md-12">
+      <div class="alert alert-info">
+         <p class="text-justify">
+            Selecciona una opción en la lista de reportes; Al final solo agrega un <strong>rango de fechas</strong>,
+            y realiza clic en <strong>Descargar</strong>.
+         </p>
+      </div>
+   </div>
+</div>
+<br />
+@using (Html.BeginForm("Reportes", "Reportes"))
+{
+   @Html.AntiForgeryToken();
+
+   <div><br /></div>
+    <!--Contenedor-->
+
+   <div class="row" id="selectDelegaciones">
+      <div class="col-md-4">
+         <label>Reportes*:</label>
+         @Html.DropDownListFor(model => model.ReporteNumero, Model.ReportesList, new { @class = "form-control", @id = "reportes", @style = "width:100%;" })
+      </div>
+      <div class="col-md-6">
+         <label class="control-label">Delegaciones: </label>
+         @Html.DropDownListFor(model => model.FiltroPdf.Delegacion, Model.Delegacion, new { @class = "form-control", @id = "delegaciones" })
+         @Html.EditorFor(model => model.FiltroPdf.psNombreDelegacion, new { htmlAttributes = new { @class = "form-control hide", @id = "delegacionNombre" } })
+      </div>
+   </div>
+   <br />
+   <div class="form-group col-md-4">
+      <label>Fecha Inicio*:</label>
+      <div class="input-group date">
+         <span class="input-group-addon" id="datepickerSpan1">
+            <span class="glyphicon glyphicon-calendar"></span>
+         </span>
+         @Html.EditorFor(model => model.FiltroPdf.FechaInicio, new { htmlAttributes = new { @class = "form-control", @id = "datepickerStart", @value = " ", @Placeholder = "dd/mm/aaaa", @style = "Width:82%; background:white;", required = "required", @readonly = "readonly" } })
+      </div>
+   </div>
+   <div class="row form-group">
+      <div class="form-group col-md-4">
+         <label>Fecha Fin*:</label>
+         <div class="input-group date">
+            <span class="input-group-addon" id="datepickerSpan2">
+               <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            @Html.EditorFor(model => model.FiltroPdf.FechaFin, new { htmlAttributes = new { @class = "form-control", @id = "datepickerEnd", @value = " ", @Placeholder = "dd/mm/aaaa", @style = "Width:82%; background:white;", required = "required", @readonly = "readonly" } })
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-4 setMiddle"><p style="color:#545454;">Campos obligatorios *</p></div>
+      <div class="col-md-4">
+         @*<a href="@Url.Action("Reportes")" class="btn btn-danger">
+            <span>Cancelar</span>
+            <span class="glyphicon glyphicon-remove"></span>
+         </a>*@
+         <button class="btn btn-primary" id="btnDescargar">
+            <span>Descargar</span>
+            <span class="glyphicon glyphicon-download"></span>
+         </button>
+          <a class="btn btn-danger" id="btnLimpiar" onclick="false">
+              <span>Cancelar</span>
+              <span class="glyphicon glyphicon-remove"></span>
+          </a>
+      </div>
+   </div>
+
+   @*@Html.Raw(TempData["msg"]);*@
+
+
+}
+<br />
+@section Scripts{
+   <!--<script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>-->
+   @Scripts.Render("~/bundles/jQureyTablero")
+   <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+   <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+   <script type="text/javascript">
+      $(document).ready(function () {
+         $('[data-toggle="tooltip"]').tooltip();
+      });
+      $('#delegaciones').change(function () {
+         var nombre = $("#delegaciones :selected").text();
+         $("#delegacionNombre").val(nombre);
+      });
+      $('#delegaciones').ready(function () {
+         var nombre = $("#delegaciones :selected").text();
+         $("#delegacionNombre").val(nombre);
+      });
+   </script>
+   <script type="text/javascript">
+      $("#li4").ready(function () {
+         $("#liBandeja").removeClass('active');
+         $("#liBitacora").removeClass('active');
+         $("#liDias").removeClass('active');
+         $("#liReportes").addClass('active');
+         $("#liTablero").removeClass('active');
+      });
+
+   </script>
+
+
+<script type="text/javascript">
+         $(document).ready(function() {
+             $("#btnLimpiar").click(function() {
+             $("form")[0].reset();
+           });
+         });
+</script>
+
+
+}
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+   $(function () {
+      $("#btnDescargar").click(function () {
+         $.ajaxSetup({
+            global: false,
+            type: "POST",
+            url: 'http://localhost:2142/Reportes/Reportes',
+            data: { ReporteNumero: $("#ReporteNumero").val() },
+            beforeSend: function () {
+               $(".modal").show();
+            },
+            complete: function () {
+               $(".modal").show();
+               $(".modal").each(function () {
+                  //$(this).fadeIn().fadeOut(1000 * (20 + 1));
+                  $(this).fadeIn(800).delay(8000).fadeOut();
+               });
+               //$(".modal").hide();
+
+            }
+         });
+         $.ajax({
+            data: "{}",
+
+            success: function () {
+               @*var str = @ViewBag.Mensaje;
+               alert(str);*@
+            },
+            error: function (data) {
+            }
+            //success: function(e) {
+            //            if(e != null)
+            //            {
+            //                $(".modal").each(function () {
+            //                            //$(this).fadeIn().fadeOut(1000 * (20 + 1));
+            //                            $(this).fadeIn(800).delay(2000).fadeOut();
+            //                        });
+            //            }
+            //            else {
+            //                 //Alert
+            //            }
+            //       }
+
+            //success: function () {
+            //    $(".modal").each(function () {
+            //        //$(this).fadeIn().fadeOut(1000 * (20 + 1));
+            //        $(this).fadeIn(800).delay(2000).fadeOut();
+            //    });
+            //    $(".modal").hide();
+            //    //$("#lblIPAddress").html("IP Address: ");
+            //}
+         });
+      });
+   });
+</script>
+
+
+
+
+
+<span id="lblIPAddress"></span>
+<div class="modal" id="pleaseWaitDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="dialog-container">
+         <div class="dialog-image">
+            <div class="dialog-message" style="background-color:#ffffff; height:60px;" align="center">
+               <h2>
+                  <img src="data:image/gif;base64,R0lGODlhGAAYAJECAP///5mZmf///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAGAAYAAACQJQvAGgRDI1SyLnI5jr2YUQx10eW5hmeB6Wpkja5SZy6tYzn+g5uMhuzwW6lFtF05CkhxGQm+HKuoDPplOlDFAAAIfkEBQoAAgAsFAAGAAQABAAAAgVUYqeXUgAh+QQFCgACACwUAA4ABAAEAAACBVRip5dSACH5BAUKAAIALA4AFAAEAAQAAAIFVGKnl1IAIfkEBQoAAgAsBgAUAAQABAAAAgVUYqeXUgAh+QQFCgACACwAAA4ABAAEAAACBVRip5dSACH5BAUKAAIALAAABgAEAAQAAAIFVGKnl1IAIfkECQoAAgAsBgAAAAQABAAAAgVUYqeXUgAh+QQJCgACACwAAAAAGAAYAAACJZQvEWgADI1SyLnI5jr2YUQx10eW5omm6sq27gvH8kzX9o3ndAEAIfkECQoAAgAsAAAAABgAGAAAAkCULxFoAAyNUsi5yOY69mFEMddHluYZntyjqY3Vul2yucJo5/rOQ6lLiak0QtSEpvv1lh8l0lQsYqJHaO3gFBQAACH5BAkKAAIALAAAAAAYABgAAAJAlC8RaAAMjVLIucjmOvZhRDHXR5bmGZ7co6mN1bpdsrnCaOf6zkOpzJrYOjHV7Gf09JYlJA0lPBQ/0ym1JsUeCgAh+QQJCgACACwAAAAAGAAYAAACQJQvEWgADI1SyLnI5jr2YUQx10eW5hme3KOpjdW6XbK5wmjn+s5Dqcya2Dox1exn9PSWJeRNSSo+cR/pzOSkHgoAIfkECQoAAgAsAAAAABgAGAAAAkCULxFoAAyNUsi5yOY69mFEMddHluYZntyjqY3Vul2yucJo5/rOQ6nMmtg6MdXsZ/T0liXc6jRbOTHR15SqfEIKACH5BAkKAAIALAAAAAAYABgAAAJAlC8RaAAMjVLIucjmOvZhRDHXR5bmGZ7co6mN1bpdsrnCaOf6zkO4/JgBOz/TrHhC9pYRpNJnqURLwtdT5JFGCgAh+QQJCgACACwAAAAAGAAYAAACPpQvEWgADI1SyLnI5jr2YUQx10eW5jme3NOpTWe5Qpu6tYzn+l558tWywW4lmk/IS6KOr2UtSILOYiYiUVAAADs=">
+                  <span class="ms-accentText dialog-accentText">
+                     &nbsp; <font color="#000000">Trabajando en ello...</font>
+                  </span>
+               </h2>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+<style type="text/css">
+   .modal {
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+      filter: alpha(opacity=60);
+      opacity: 0.6;
+   }
+</style>
+
+
+
+<script type="text/javascript" language="javascript">
+   function MyAlert() {
+      alert('Hi');
+   }
+</script>

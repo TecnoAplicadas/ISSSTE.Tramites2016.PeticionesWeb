@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBitacora.cshtml";
+}
+
+
+<div ng-app="bitacoraForm" ng-controller="bitacoraController as bitacora">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Bitácora del sistema</h2>
+            <hr class="Negro1" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="alert alert-info alert-dismissible col-md-12" ng-if="!bitacora.noDatos == undefined || !bitacora.noDatos == ''" ng-cloak>
+                <button type="button" class="close" data-dissmiss="alert" ng-click="bitacora.resetnoDatos()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div>
+                    <span id="spanError">{{bitacora.noDatos}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="alert alert-danger alert-dismissible col-md-12" ng-if="!bitacora.msgError == undefined || !bitacora.msgError == ''" ng-cloak>
+                <button type="button" class="close" data-dissmiss="alert" ng-click="bitacora.resetError()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div>
+                    <span id="spanError">{{bitacora.msgError}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <form role="form" ng-submit="bitacora.getBitacoraDetails(bitacoraForm)" name="bitacoraForm">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="userTxt" class="control-label">Usuario:</label>
+                        <input type="text" id="userTxt" maxlength="100" name="userTxt" class="form-control" ng-model="bitacora.usuarioSearch" input-usuario />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="fileNumTxt" class="control-label">Folio:</label>
+                        <input type="text" id="fileNumTxt" maxlength="50" name="fileNumTxt" class="form-control" ng-model="bitacora.folioSearch" input-folio />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="startDateTxt" class="control-label">Fecha inicio:</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon" id="startDateSpan">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" id="startDateTxt" name="startDateTxt" placeholder="dd/mm/aaaa" class="form-control" ng-change="bitacora.setSameValue()" style="width:81%; background:white;" readonly="readonly" ng-model="bitacora.startDateSearch" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="endDateTxt" class="control-label">Fecha fin: </label>
+                        <div class="input-group date" style="position: relative;">
+                            <span class="input-group-addon" id="endDateSpan">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" id="endDateTxt" name="endDateTxt" placeholder="dd/mm/aaaa" class="form-control" style="width:81%; background:white;" readonly="readonly" ng-model="bitacora.endDateSearch" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="btn-group col-md-4 col-md-offset-4">
+                        <button type="submit" id="btnBitSearch" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" ng-if="bitacora.bitacoraTable != ''" ng-cloak>
+                        <thead>
+                            <tr style="color:white; background-color:#4D7DA6;">
+                                <th class="col-md-2 text-center">Fecha</th>
+                                <th class="col-md-2 text-center">Hora</th>
+                                <th class="col-md-3 text-center">Folio</th>
+                                <th class="col-md-3 text-center">Evento</th>
+                                <th class="col-md-2 text-center">Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="bitacoraDetail in bitacora.bitacoraTable|itemsPerPage:10">
+                                <td>{{bitacoraDetail.Fecha}}</td>
+                                <td>{{bitacoraDetail.Hora}}</td>
+                                <td>{{bitacoraDetail.Folio}}</td>
+                                <td>{{bitacoraDetail.Evento}}</td>
+                                <td>{{bitacoraDetail.Usuario}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot ng-if="bitacora.bitacoraTable.length > 10">
+                            <tr>
+                                <td colspan="6" class="text-right">
+                                    <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+                                    </dir-pagination-controls>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

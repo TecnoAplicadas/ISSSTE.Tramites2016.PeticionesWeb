@@ -1,0 +1,40 @@
+﻿span.tabValidation {
+    color:white;
+    font-size: 14px;
+    margin-left: -1em;
+}
+
+.angularMsgError {
+    color:#D0021B;
+    font-size: 14px;
+}
+
+.redBorderError {
+    border: solid 1px #D0021B;
+}
+
+.TextToUpper {
+    text-transform: uppercase;
+}
+
+.v-align {
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div.setMiddle {
+  line-height: 50px;
+}
+
+span.asteriskError {
+    color: #D0021B;
+}
+
+span.blackColor {
+    color: black;
+}
+
+div.setMiddleText {
+    text-align:center;
+}

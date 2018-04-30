@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+@using ISSSTE.Tramites2015.Common.Security.Helpers
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/favicons/favicon.ico" rel="shortcut icon" />
+   @Styles.Render("~/Content/css")
+   @Styles.Render("~/Content/LayoutPeticionesCss")
+   @Styles.Render("~/request-form/css")
+   @Styles.Render("~/bundles/DatePicker")
+   @Styles.Render("~/bundles/CssLayoutPeticiones/css")
+   @Styles.Render("~/bundles/OpenSans")
+   @Styles.Render("~/bundles/SansSerif")
+   @Styles.Render("~/bundles/generalCSS")
+   @Styles.Render("~/bundles/DatePicker")
+   @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+   <div class="container-fluid">
+      <img class="logo" src="@Url.Content("~/Imagenes/LayoutPeticiones/issste-logo.jpg")">
+   </div>
+
+   <div class="navbar navbar-default abl-navbar" role="navigation">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#side-menu" aria-expanded="false">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+      </button>
+      <div class="container-fluid">
+         <div>
+            <ul class="nav navbar-nav navbar-left">
+               <li>
+                  <a href="@Url.Action("BandejaIndex", "BandejaDepeticiones" , null, Request.Url.Scheme)">
+                     @ViewBag.Title
+                  </a>
+               </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-user">
+               @if (Request.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
+               {
+                  <li>
+                     @{
+                        var user = Request.GetOwinContext().GetAuthenticatedUser();
+                        var displayName = String.IsNullOrEmpty(user.Name) ? user.UserName : user.Name;
+                     }
+                     <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user abl-usuarios"></span>
+                        @displayName <b class="caret"></b>
+                     </a>
+                     <ul class="dropdown-menu multi-level">
+                        <li>
+                           <a href="@Url.Action("Logout", "Account" , new { returnUrl=Url.Action("BandejaIndex", "BandejaDepeticiones" , null, Request.Url.Scheme) }, null)">
+                              Cerrar sesión
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                        }
+            </ul>
+         </div><!--/.nav-collapse -->
+      </div><!--/.container -->
+   </div><!--/.navbar -->
+
+
+   <div class="row content ">
+      <div class="col-sm-2 sidenav">
+         <br />
+         @{ var idUser = Convert.ToInt32(Session["IdUsuarioRolReportes"]); }
+         <ul class="nav nav-pills nav-stacked">
+            <li id="liBandeja">
+               <a href="~/BandejaDePeticiones/Reset">Bandeja De Peticiones</a>
+            </li>
+            @if (idUser == 1)
+            {
+               <li class="@ViewBag.OcultaOpcionMenuDias" id="liBitacora">
+                  <a href="~/Bitacora/Index">Bitácora Del Sistema</a>
+               </li>
+               <li class="@ViewBag.OcultaOpcionMenuDias" id="liDias">
+                  <a href="~/DiasNoLaborables/ListaDiasNoLaborables">Días No Laborables</a>
+               </li>
+            }
+            @*<li><a href="#section3">   Administración</a></li>*@
+            @if (idUser == 1 | idUser == 2)
+            {
+               <li class="@ViewBag.OcultaOpcionMenuReportes" id="liReportes">
+                  <a href="~/Reportes/Reportes">   Reportes</a>
+               </li>
+               <li class="@ViewBag.OcultaOpcionMenuTablero" id="liTablero">
+                  <a href="~/Reportes/TableroDeControl">   Tablero De Control</a>
+               </li>
+            }
+         </ul>
+         <br>
+      </div>
+      <div class="col-sm-10">
+         <main class="page">
+            @RenderBody()
+         </main>
+      </div>
+   </div>
+      @Scripts.Render("~/bundles/bootstrap")
+      @Scripts.Render("~/bundles/angularjs")
+      @Scripts.Render("~/bundles/bitacora-form")
+      <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function () {
+            $("#liBandeja").remove('active');
+            $("#liBitacora").addClass('active');
+            $("#liDias").removeClass('active');
+            $("#liReportes").removeClass('active');
+            $("#liTablero").removeClass('active');
+         });
+      </script>
+</body>
+</html>

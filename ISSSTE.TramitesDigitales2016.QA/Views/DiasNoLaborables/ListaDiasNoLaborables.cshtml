@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<ISSSTE.TramitesDigitales2016.Modelos.Contextos.pa_PeticionesWeb_Catalogos_Obtener_DiasNoLaborables_Result>
+@using PagedList.Mvc;
+@{
+   ViewBag.Title = "DiasNoLaborables";
+   Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+<div class="row">
+   <div class="col-md-12">
+      <h2>Días no laborables</h2>
+      <hr class="Negro1" />
+   </div>
+</div>
+@if (ViewBag.ErrorMessage != null)
+{
+   <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      Ha ocurrido un problema al cargar los días no laborables.
+   </div>
+}
+<div class="row">
+   <div class="col-md-12">
+      @*@Html.ActionLink("+ Agregar Día No Laborable", "AgregaDiasNoLaborables",null,
+         new
+         {
+             @class = "btn btn-primary",
+             @style = "color:white"
+         })*@
+      <a href="@Url.Action("AgregaDiasNoLaborables")" class="btn btn-primary">
+         <span>Agregar día no laborable</span>
+         <span class="glyphicon glyphicon-plus"></span>
+      </a>
+   </div>
+</div>
+<br />
+<div class="row">
+   <div class="col-md-12">
+      <table class="display table table-hover table-striped table-bordered">
+         <tr style="color:white;">
+            <th class="text-center" style="background-color:#4D7DA6;">Día</th>
+            <th class="text-center" style="background-color:#4D7DA6;">Fecha</th>
+            <th class="text-center" style="background-color:#4D7DA6;">Descripción</th>
+            <th class="text-center" style="background-color:#4D7DA6;"></th>
+         </tr>
+         @if (ViewBag.ErrorMessage == null)
+         {
+            foreach (var item in Model)
+            {
+               <tr class="text-center">
+                  <td>
+                     @Html.DisplayFor(item1 => item.Dia, new { @class = "" })
+                  </td>
+                  <td>
+                     @Html.DisplayFor(item1 => item.FechaFormato, new { @class = "" })
+                  </td>
+                  <td>
+                     @Html.DisplayFor(item1 => item.Descripcion, new { @class = "" })
+                  </td>
+                  <td>
+                     @Html.ActionLink("Eliminar", "EliminaDiasNoLaborables", new { idRegistro = item.IdFechaNoLaborable },
+                             new
+                             {
+                                @class = "btn btn-danger",
+                                @style = "color:white"
+                             }
+                             )
+                  </td>
+               </tr>
+            }
+         }
+      </table>
+   </div>
+   <br />
+</div>
+<div class="row">
+   <div class="col-md-2">
+   </div>
+   <div class="col-md-10 text-right">
+      @Html.PagedListPager(Model, page => Url.Action("ListaDiasNoLaborables", new { page }))
+   </div>
+</div>
+<br />
+@section Scripts{
+   <script type="text/javascript">
+      $("#li4").ready(function () {
+                $("#liBandeja").removeClass('active');
+                $("#liBitacora").removeClass('active');
+                $("#liDias").addClass('active');
+                $("#liReportes").removeClass('active');
+                $("#liTablero").removeClass('active');
+             });
+   </script>
+}

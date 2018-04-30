@@ -1,0 +1,179 @@
+﻿
+@model PagedList.IPagedList<ISSSTE.TramitesDigitales2016.Modelos.Contextos.pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Usuario_Result>
+@using PagedList.Mvc;
+
+<link href="~/Content/Modulos/CssBandejaDePeticiones/EstilosSemaforos.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Sistema de atención a peticiones de los usuarios de los seguros, prestaciones y servicios institucionales del ISSSTE (SAPUSPSI) " + System.Configuration.ConfigurationManager.AppSettings["versionSAPUSPSI"];
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+<div class="row">
+   <div class="col-sm-12">
+      <h2> Bandeja de peticiones</h2>
+      <hr class="Negro1" />
+   </div>
+</div>
+
+@using (Html.BeginForm("BandejaIndex", "BandejaDepeticiones", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+   <div class="row">
+      <div class="col-sm-12">
+         <a href="@Url.Action("BuscarPeticion")" class="btn btn-primary">
+            <span>Buscar</span>
+            <span class="glyphicon glyphicon-search"></span>
+         </a>
+         <a href="@Url.Action("DetallePeticiones")" class="btn btn-primary">
+            <span>Descargar</span>
+            <span class="glyphicon glyphicon-download"></span>
+         </a>
+      </div>
+   </div>
+    <br />
+   <div class="row">
+      <div class="col-sm-12">
+         <table id="myTable" class="display table table-hover table-striped table-bordered" width="100%">
+            <thead class="thead-inverse table-bordered" style="background-color:#4D7DA6;">
+               <tr>
+                  <th class="text-center">
+                     @Html.Label("Folio", new { @style = "color:#FFFFFF" })
+                     @*<p>
+                            Find by name: @Html.TextBox("SearchString")
+                            <input type="submit" value="Search" />
+                        </p>
+                        @Html.ActionLink("Folio", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                  </th>
+                  <th class="text-center">
+                     @Html.Label("Unidad médica", new { @style = "color:#FFFFFF" })
+                  </th>
+                  <th class="text-center">
+                     @Html.Label("Fecha hechos", new { @style = "color:#FFFFFF" })
+                  </th>
+                  <th class="text-center">
+                     @Html.Label("Tipo de asunto", new { @style = "color:#FFFFFF" })
+                  </th>
+                  <th class="text-center">
+                     @Html.Label("Nombre del peticionario", new { @style = "color:#FFFFFF" })
+                  </th>
+                  <th @ViewBag.ColumnaAsinarOperador class="text-center">
+                     @Html.Label("Asignar operador", new { @style = "color:#FFFFFF" })
+                  </th>
+                  <th class="text-center">
+                     @Html.Label("Detalle", new { @style = "color:#FFFFFF" })
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach (var item in Model)
+               {
+                  <tr class="@item.SemaforoPeticion row-border">
+                     <td class="dt-center">
+                        @Html.DisplayFor(modelItem => item.Folio, new { @class = "text - center" })
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.UPSNombre)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.FechaHechos)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.CausaAsunto)
+                     </td>
+                     <td >
+                        <span style="display: inline-block; word-break:break-all;"> @Html.DisplayFor(modelItem => item.NombreUsuario)</span>
+                     </td>
+                     <td @ViewBag.ColumnaAsinarOperador>
+                        @if (item.IdOperador == null)
+                        {
+                           <a href="@Url.Action("AsignarOperador", new { IdFolioPar = item.Folio, IdUPSPar = item.IdUPS, item.IdPeticion,Reasigancionoperador = true })" class="btn btn-sm btn-primary">
+                              <span>Asignar</span>
+                              <span class="glyphicon glyphicon-user"></span>
+                           </a>
+                        }
+                        else
+                        {
+                           if (item.IdEstatusInterno == 5)
+                           {
+                              <a href="#" class="btn btn-sm btn-danger" disabled="disabled">
+                                 <span>Reasignación</span>
+                                 <span class="glyphicon glyphicon-ban-circle"></span>
+                              </a>
+                           }
+                           else
+                           {
+                              <a href="@Url.Action("AsignarOperador",new { IdFolioPar = item.Folio,IdUPSPar = item.IdUPS,item.IdPeticion,Reasigancionoperador = false})"
+                                 class="btn btn-sm btn-danger">
+                                 <span>Reasignación</span>
+                                 <span class="glyphicon glyphicon-retweet"></span>
+                              </a>
+                           }
+
+                        }
+                     </td>
+                     <td>
+                        <a href="@Url.Action("MenuDetalle",new { IdFolioPar = item.Folio, IdUPSPar = item.IdUPS, item.IdPeticion })" class="btn btn-sm btn-primary">
+                           <span>Detalle</span>
+                           <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        @Html.Hidden("FolioParam", item.Folio)
+                     </td>
+                  </tr>
+               }
+            </tbody>
+         </table>
+      </div>
+   </div>
+}
+
+<div class="row">
+   <div class="col-sm-2">
+   </div>
+   <div class="col-sm-10">
+      <nav class="text-right">
+         @Html.PagedListPager(Model, page => Url.Action("BandejaIndex", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+      </nav>
+   </div>
+</div>
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data- dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Deletion confirmation</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>You're about to delete the customer' </p>
+                <p><strong>Are you sure you want to continue?  </strong>     </p>
+
+                @using (Html.BeginForm("Index", "ModalDialog", FormMethod.Post, new { @id = "delete-form" }))
+                {
+                    @Html.Hidden("customerId", 1)
+                    @Html.AntiForgeryToken()
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-md" onclick="$('#delete-form').submit();">Yes,delete this customer.</button>
+                <br />
+                <button type="button" class="btn btn-primary btn-md" data-dismiss="modal">No, do not delete.</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+   <script type="text/javascript">
+      $(document).ready(function () {
+            $("#liBandeja").addClass('active');
+            $("#liBitacora").removeClass('active');
+            $("#liDias").removeClass('active');
+            $("#liReportes").removeClass('active');
+            $("#liTablero").removeClass('active');
+      });
+   </script>
+}
+
+
+

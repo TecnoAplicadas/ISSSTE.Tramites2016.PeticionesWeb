@@ -1,0 +1,143 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion", "ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion\ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion.csproj", "{97ABCE18-DEE3-43CC-807C-7CF170145293}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA} = {C14F8804-3768-4B4B-B162-B1E8A73A21FA}
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531} = {A6F24563-EBF9-4F4E-89AA-177941FD7531}
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C} = {30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7} = {B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos", "ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos\ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos.csproj", "{C14F8804-3768-4B4B-B162-B1E8A73A21FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531} = {A6F24563-EBF9-4F4E-89AA-177941FD7531}
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C} = {30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn", "ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn\ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn.csproj", "{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA} = {C14F8804-3768-4B4B-B162-B1E8A73A21FA}
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531} = {A6F24563-EBF9-4F4E-89AA-177941FD7531}
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C} = {30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.TramitesDigitales2016.Modelos", "ISSSTE.TramitesDigitales2016.Modelos\ISSSTE.TramitesDigitales2016.Modelos.csproj", "{A6F24563-EBF9-4F4E-89AA-177941FD7531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes", "ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes\ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes.csproj", "{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.Tramites2015.Common", "ISSSTE.Tramites2015.Common\ISSSTE.Tramites2015.Common.csproj", "{70146A9C-A112-4916-85EA-803FD6842EE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.Tramites2015.Common.Reports", "ISSSTE.Tramites2015.Common.Reports\ISSSTE.Tramites2015.Common.Reports.csproj", "{7AFC95C6-10A2-4E7B-B577-CB25B982487D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISSSTE.Tramites2015.Common.Security", "ISSSTE.Tramites2015.Common.Security\ISSSTE.Tramites2015.Common.Security.csproj", "{41EDE42E-3634-4BF0-A680-256B9A6E699B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		ConviveTesting|Any CPU = ConviveTesting|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		RecreativoTesting|Any CPU = RecreativoTesting|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97ABCE18-DEE3-43CC-807C-7CF170145293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14F8804-3768-4B4B-B162-B1E8A73A21FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A1CAD4-E134-4695-A8A0-5BBE2570B3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F24563-EBF9-4F4E-89AA-177941FD7531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FE846D-86D2-49C8-A3C8-0DF265F2FB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70146A9C-A112-4916-85EA-803FD6842EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.ConviveTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.ConviveTesting|Any CPU.Build.0 = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.RecreativoTesting|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.RecreativoTesting|Any CPU.Build.0 = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFC95C6-10A2-4E7B-B577-CB25B982487D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.ConviveTesting|Any CPU.ActiveCfg = ConviveTesting|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.ConviveTesting|Any CPU.Build.0 = ConviveTesting|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.RecreativoTesting|Any CPU.ActiveCfg = RecreativoTesting|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.RecreativoTesting|Any CPU.Build.0 = RecreativoTesting|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EDE42E-3634-4BF0-A680-256B9A6E699B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alexo2k.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ISSSTE.Tramites2015.Common.Reports\\ISSSTE.Tramites2015.Common.Reports.csproj
+		SccProjectName1 = ISSSTE.Tramites2015.Common.Reports
+		SccLocalPath1 = ISSSTE.Tramites2015.Common.Reports
+		SccProjectUniqueName2 = ISSSTE.Tramites2015.Common.Security\\ISSSTE.Tramites2015.Common.Security.csproj
+		SccProjectName2 = ISSSTE.Tramites2015.Common.Security
+		SccLocalPath2 = ISSSTE.Tramites2015.Common.Security
+		SccProjectUniqueName3 = ISSSTE.Tramites2015.Common\\ISSSTE.Tramites2015.Common.csproj
+		SccProjectName3 = ISSSTE.Tramites2015.Common
+		SccLocalPath3 = ISSSTE.Tramites2015.Common
+		SccProjectUniqueName4 = ISSSTE.TramitesDigitales2016.Modelos\\ISSSTE.TramitesDigitales2016.Modelos.csproj
+		SccProjectName4 = ISSSTE.TramitesDigitales2016.Modelos
+		SccLocalPath4 = ISSSTE.TramitesDigitales2016.Modelos
+		SccProjectUniqueName5 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes\\ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes.csproj
+		SccProjectName5 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes
+		SccLocalPath5 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Comunes
+		SccProjectUniqueName6 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion\\ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion.csproj
+		SccProjectName6 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion
+		SccLocalPath6 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion
+		SccProjectUniqueName7 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos\\ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos.csproj
+		SccProjectName7 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos
+		SccLocalPath7 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Procesos
+		SccProjectUniqueName8 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn\\ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn.csproj
+		SccProjectName8 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn
+		SccLocalPath8 = ISSSTE.TramitesDigitales2016.PeticionesWeb.Rdn
+	EndGlobalSection
+EndGlobal

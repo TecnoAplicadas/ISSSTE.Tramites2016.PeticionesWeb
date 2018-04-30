@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6F24563-EBF9-4F4E-89AA-177941FD7531}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ISSSTE.TramitesDigitales2016.Modelos</RootNamespace>
+    <AssemblyName>ISSSTE.TramitesDigitales2016.Modelos</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Referencias\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Referencias\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClasesAbstractas\ACatalogo.cs" />
+    <Compile Include="ClasesAbstractas\APersona.cs" />
+    <Compile Include="ClasesAbstractas\APeticion.cs" />
+    <Compile Include="ClasesConcretas\clsAfectado.cs" />
+    <Compile Include="ClasesConcretas\clsArea.cs" />
+    <Compile Include="ClasesConcretas\clsBitacoraAccionOperador.cs" />
+    <Compile Include="ClasesConcretas\clsCausaAsunto.cs" />
+    <Compile Include="ClasesConcretas\clsClasificacionUps.cs" />
+    <Compile Include="ClasesConcretas\clsCoberturaEnlace.cs" />
+    <Compile Include="ClasesConcretas\clsCodigoPostal.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionEstatusInternoEstatusExterno.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionFlujoEstatusEstatusInterno.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionFlujoNotificacionNotificacion.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionFlujoRecordatorioRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionFlujoSemaforoSemaforo.cs" />
+    <Compile Include="ClasesConcretas\clsConfiguracionUsuarioUps.cs" />
+    <Compile Include="ClasesConcretas\clsDetalleConfiguracionFlujoRecordatorioRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionArchivo.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionInvolucrado.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionNotificacion.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionRecordatorioDestinatario.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionSeguimientoOperador.cs" />
+    <Compile Include="ClasesConcretas\clsDetallePeticionSeguimieto.cs" />
+    <Compile Include="ClasesConcretas\clsDiaNoLaborable.cs" />
+    <Compile Include="ClasesConcretas\clsEnlace.cs" />
+    <Compile Include="ClasesConcretas\clsEstado.cs" />
+    <Compile Include="ClasesConcretas\clsEstatusExterno.cs" />
+    <Compile Include="ClasesConcretas\clsEstatusInterno.cs" />
+    <Compile Include="ClasesConcretas\clsEstatusRegistro.cs" />
+    <Compile Include="ClasesConcretas\clsEstatusSemaforo.cs" />
+    <Compile Include="ClasesConcretas\clsFlujoEstatus.cs" />
+    <Compile Include="ClasesConcretas\clsFlujoNotificacion.cs" />
+    <Compile Include="ClasesConcretas\clsFlujoRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsFlujoSemaforo.cs" />
+    <Compile Include="ClasesConcretas\clsGenero.cs" />
+    <Compile Include="ClasesConcretas\clsMotivoRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsMunicipio.cs" />
+    <Compile Include="ClasesConcretas\clsNivelUps.cs" />
+    <Compile Include="ClasesConcretas\clsNotificacion.cs" />
+    <Compile Include="ClasesConcretas\clsPais.cs" />
+    <Compile Include="ClasesConcretas\clsPeticion.cs" />
+    <Compile Include="ClasesConcretas\clsPeticionario.cs" />
+    <Compile Include="ClasesConcretas\clsPoblacionOColonia.cs" />
+    <Compile Include="ClasesConcretas\clsRecordatorio.cs" />
+    <Compile Include="ClasesConcretas\clsRol.cs" />
+    <Compile Include="ClasesConcretas\clsSemaforo.cs" />
+    <Compile Include="ClasesConcretas\clsServicioHecho.cs" />
+    <Compile Include="ClasesConcretas\clsServiciosHecho.cs" />
+    <Compile Include="ClasesConcretas\clsTipoAccionOperador.cs" />
+    <Compile Include="ClasesConcretas\clsTipoDerechoHabiente.cs" />
+    <Compile Include="ClasesConcretas\clsTipoEnlace.cs" />
+    <Compile Include="ClasesConcretas\clsTipoOpinion.cs" />
+    <Compile Include="ClasesConcretas\clsTipoPersonal.cs" />
+    <Compile Include="ClasesConcretas\clsTipoRol.cs" />
+    <Compile Include="ClasesConcretas\clsTipoUps.cs" />
+    <Compile Include="ClasesConcretas\clsTipoUsuario.cs" />
+    <Compile Include="ClasesConcretas\clsUnidadAdministrativa.cs" />
+    <Compile Include="ClasesConcretas\clsUnidadAdministrativaUnidadTransversal.cs" />
+    <Compile Include="ClasesConcretas\clsUnidadPrestadoraServicio.cs" />
+    <Compile Include="ClasesConcretas\clsUnidadTransversal.cs" />
+    <Compile Include="ClasesConcretas\clsUsuario.cs" />
+    <Compile Include="ClasesConcretas\ParamEntradaGeneral.cs" />
+    <Compile Include="Contextos\AspNetUsers.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\CatalogoEsatusInterno_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Adjuntos_Obtener_Adjuntos_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Filtra_Peticion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Operador_Por_Unidad_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_DetalleExportaExcel_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Detalle_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Filtros_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Usuario_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtiener_UsuariosQueCompartenUPS_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bandeja_Peticiones_Obtiene_Operador_Por_UPS_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Bitacora_Obtener_BitacoraPeticion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_EsatusInterno_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_Areas_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_CausasAsuntoPorTipoOpinionYArea_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_CausasAsunto_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_CodigosPostales_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_DelegacionesReportesPDF_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_DiasNoLaborables_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_EstadoByCodigoPostal_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_Estados_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_FelicitacionCausa_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_FelicitacionServicio_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_FelicitacionUnidades_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_Generos_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_InconformidadCausa_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_InconformidadServicio_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_InconformidadUnidades_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_MunicipioByCodigoPostal_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_Municipios_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_OrientacionCausa_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_OrientacionServicio_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_OrientacionUnidades_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_Paises_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_PoblacionesColonias_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_PoblacionesOColoniasByCodigoPostal_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_ServiciosHechosPorArea_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_ServiciosHechos_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SolicitudSCausa_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SolicitudSServicio_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SolicitudSUnidades_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SugerenciaCausa_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SugerenciaServicio_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_SugerenciaUnidades_ReporteTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_TiposDerhabiente_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_TiposOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_TiposPersonal_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_TipoUps_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_UndadesAdministrativas_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Catalogos_Obtener_UndsPrestadoraServicios_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_ConfiguraPermisosUsuario_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_DiasNoLaborables_Obtener_DiasNoLaborables_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Notificaciones_Obtener_Notificaciones_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_PersonalInvolucrado_Obtener_PersonalInvolucrado_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Peticion_Guardar_Peticion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Recordatorios_Obtener_Recordatorios_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Catalogos_Obtener_CausaAsunto_TableroControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Catalogos_Obtener_Status_TableroControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Catalogos_Obtener_TiposOpinion_TableroControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Catalogos_Obtener_Ups_TableroControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_ReporteOrdenadoPorTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_ReporteOrdenadosPorCaptacion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_ReporteServiciosHechosPorDelegacion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_ReporteTipoOpinionesMasEjercidasB_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_ReporteTipoOpinionesMasEjercidas_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_RptOrdenadoPorTipoOpinion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Reportes_Generar_RptServiciosHechosPorDelegacion_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_SeguimientoOperador_Obtener_SeguimientoOperador_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroControl_Obtener_IndicadoresPanelControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroControl_Obtener_Peticiones_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroControl_Obtener_Peticiones_Result1.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroControl_Obtener_PuntosControl_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroControl_Obtener_TotalPeticionesPorEstatus_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroDeControlConfiguracionDias_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroDeControlGeneral_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroDeEncabazadosDetalle_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_TableroDeEncabazadosEstadisticas_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Usuarios_Obtener_InformacionUsuario_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\pa_PeticionesWeb_Usuarios_Obtener_Usuario_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\PeticionesWeb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PeticionesWeb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\PeticionesWeb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\PeticionesWeb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PeticionesWeb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\reporte_xyz_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\sp_helpdiagrams_Result.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contextos\Usuarios.cs">
+      <DependentUpon>PeticionesWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ejemplo.cs" />
+    <Compile Include="Interfaces\ICatalogo.cs" />
+    <Compile Include="Interfaces\ICrud.cs" />
+    <Compile Include="Interfaces\IPersona.cs" />
+    <Compile Include="Interfaces\IPeticion.cs" />
+    <Compile Include="Modelos\Afectado.cs" />
+    <Compile Include="Modelos\BitacoraAccionOperador.cs" />
+    <Compile Include="Modelos\CausaAsunto.cs" />
+    <Compile Include="Modelos\ClasificacionUps.cs" />
+    <Compile Include="Modelos\CoberturaEnlace.cs" />
+    <Compile Include="Modelos\CodigoPostal.cs" />
+    <Compile Include="Modelos\ConfiguracionEstatusInternoEstatusExterno.cs" />
+    <Compile Include="Modelos\ConfiguracionFlujoEstatusEstatusInterno.cs" />
+    <Compile Include="Modelos\ConfiguracionFlujoNotificacionNotificacion.cs" />
+    <Compile Include="Modelos\ConfiguracionFlujoRecordatorioRecordatorio.cs" />
+    <Compile Include="Modelos\ConfiguracionFlujoSemaforoSemaforo.cs" />
+    <Compile Include="Modelos\ConfiguracionUsuarioRol.cs" />
+    <Compile Include="Modelos\ConfiguracionUsuarioUps.cs" />
+    <Compile Include="Modelos\DelegacionesUsuarioSeguridad.cs" />
+    <Compile Include="Modelos\DetalleConfiguracionFlujoRecordatorioRecordatorio.cs" />
+    <Compile Include="Modelos\DetallePeticion.cs" />
+    <Compile Include="Modelos\DetallePeticionArchivo.cs" />
+    <Compile Include="Modelos\DetallePeticionInvolucrado.cs" />
+    <Compile Include="Modelos\DetallePeticionNotificacion.cs" />
+    <Compile Include="Modelos\DetallePeticionRecordatorio.cs" />
+    <Compile Include="Modelos\DetallePeticionRecordatorioDestinatario.cs" />
+    <Compile Include="Modelos\DetallePeticionSeguimiento.cs" />
+    <Compile Include="Modelos\DetallePeticionSeguimientoOperador.cs" />
+    <Compile Include="Modelos\DiaNoLaborable.cs" />
+    <Compile Include="Modelos\Enlace.cs" />
+    <Compile Include="Modelos\Estado.cs" />
+    <Compile Include="Modelos\EstatusExterno.cs" />
+    <Compile Include="Modelos\EstatusInterno.cs" />
+    <Compile Include="Modelos\EstatusRegistro.cs" />
+    <Compile Include="Modelos\EstatusSemaforo.cs" />
+    <Compile Include="Modelos\FlujoEstatus.cs" />
+    <Compile Include="Modelos\FlujoNotificacion.cs" />
+    <Compile Include="Modelos\FlujoRecordatorio.cs" />
+    <Compile Include="Modelos\FlujoSemaforo.cs" />
+    <Compile Include="Modelos\Genero.cs" />
+    <Compile Include="Modelos\ManejoErrores\ErrorProcedimientoAlmacenado.cs" />
+    <Compile Include="Modelos\MotivoRecordatorio.cs" />
+    <Compile Include="Modelos\Municipio.cs" />
+    <Compile Include="Modelos\NivelUps.cs" />
+    <Compile Include="Modelos\Notificacion.cs" />
+    <Compile Include="Modelos\Pais.cs" />
+    <Compile Include="Modelos\Peticion.cs" />
+    <Compile Include="Modelos\Peticionario.cs" />
+    <Compile Include="Modelos\PoblacionOColonia.cs" />
+    <Compile Include="Modelos\Recordatorio.cs" />
+    <Compile Include="Modelos\Rol.cs" />
+    <Compile Include="Modelos\RolesDeUsuarioSeguridad.cs" />
+    <Compile Include="Modelos\RolesSeguridad.cs" />
+    <Compile Include="Modelos\Semaforo.cs" />
+    <Compile Include="Modelos\ServicioHecho.cs" />
+    <Compile Include="Modelos\TipoAccionOperador.cs" />
+    <Compile Include="Modelos\TipoDerechohabiente.cs" />
+    <Compile Include="Modelos\TipoEnlace.cs" />
+    <Compile Include="Modelos\TipoOpinion.cs" />
+    <Compile Include="Modelos\TipoPersonal.cs" />
+    <Compile Include="Modelos\TipoRol.cs" />
+    <Compile Include="Modelos\TipoUps.cs" />
+    <Compile Include="Modelos\TipoUsuario.cs" />
+    <Compile Include="Modelos\UnidadAdministrativa.cs" />
+    <Compile Include="Modelos\UnidadAdministrativaUnidadTransversal.cs" />
+    <Compile Include="Modelos\UnidadPrestadoraServicio.cs" />
+    <Compile Include="Modelos\UnidadTransversal.cs" />
+    <Compile Include="Modelos\UpsUsuarioSeguridad.cs" />
+    <Compile Include="Modelos\Usuario.cs" />
+    <Compile Include="Modelos\UsuarioPeticiones.cs" />
+    <Compile Include="Modelos\UsuarioSeguridad.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Debug\ISSSTE.TramitesDigitales2016.Modelos.dll.config" />
+    <EntityDeploy Include="Contextos\PeticionesWeb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PeticionesWeb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Contextos\PeticionesWeb.edmx.diagram">
+      <DependentUpon>PeticionesWeb.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="TD2016 Edgar.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\ISSSTE.TramitesDigitales2016.Modelos.dll" />
+    <Content Include="bin\Debug\ISSSTE.TramitesDigitales2016.Modelos.pdb" />
+    <Content Include="Contextos\PeticionesWeb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PeticionesWeb.edmx</DependentUpon>
+      <LastGenOutput>PeticionesWeb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Contextos\PeticionesWeb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PeticionesWeb.edmx</DependentUpon>
+      <LastGenOutput>PeticionesWeb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

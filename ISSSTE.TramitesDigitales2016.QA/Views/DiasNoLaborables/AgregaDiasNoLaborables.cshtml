@@ -1,0 +1,90 @@
+﻿@model ISSSTE.TramitesDigitales2016.Modelos.Modelos.DiaNoLaborable
+@{
+    ViewBag.Title = "AgregaDiasNoLaborables";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Agregar días no laborales</h2>
+        <hr class="Negro1" />
+    </div>
+</div>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Ha ocurrido un problema al agregar registro.
+    </div>
+}
+@if (ViewBag.ExisteDia != null)
+{
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @ViewBag.ExisteDia
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-4">
+            <label>Día: </label>
+            <div class="input-group">
+                <span class="input-group-addon" id="datepickerSpan4">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @style = "width:82%; background:white;", @id = "txtDate", @value = " ", @Placeholder = "dd/mm/aaaa", @readonly = "readonly" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <label>Descripción: </label>
+            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", @id = "txtDescripcion" } })
+            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary">Guardar <span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+            <a href="@Url.Action("ListaDiasNoLaborables")" class="btn btn-danger">
+                Cancelar <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+@section scripts{
+    @Scripts.Render("~/bundles/jQureyTablero")
+    <script type="text/javascript">
+      $(document).ready(function () {
+         $('#txtDate').val('');
+      });
+    </script>
+    <script type="text/javascript">
+      $("#li4").ready(function () {
+                $("#liBandeja").removeClass('active');
+                $("#liBitacora").removeClass('active');
+                $("#liDias").addClass('active');
+                $("#liReportes").removeClass('active');
+                $("#liTablero").removeClass('active');
+             });
+    </script>
+
+    <script type="text/javascript">
+    $('#txtDescripcion').on('input', function (evt) {
+        $(this).val(function (_, val) {
+
+            var pattern = /[^0-9a-zA-Z,.\\()$%#&*\-_+=¿?!¡ \/ñÑ]*/g;
+            var transformedInput = val.replace(pattern, '').toUpperCase();
+            return transformedInput;
+        });
+    });
+
+    </script>
+
+}

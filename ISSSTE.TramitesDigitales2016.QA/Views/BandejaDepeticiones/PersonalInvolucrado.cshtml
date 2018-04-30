@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "PersonalInvolucrado";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Personal involucrado</h2>
+        <hr class="Negro1">
+    </div>
+</div>
+@*<nav class="navbar navbar-default">*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li role="presentation" @ViewBag.OcultaTab>
+                    @Html.ActionLink("Detalle de la petición", "MenuDetalle")
+                </li>
+
+                <li role="presentation" @ViewBag.OcultaTab>
+                    @Html.ActionLink("Seguimiento", "Seguimiento")
+                </li>
+                <li role="presentation" class="active" @ViewBag.OcultaTab>
+                    @Html.ActionLink("Agregar personal", "PersonalInvolucrado")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <br />
+</div>
+@*</nav>*@
+<body ng-app="followupForm" ng-controller="FollowupController as followup" style="min-width:480px;" ng-cloak>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Personal Involucrado</h4>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible col-md-12" ng-if="!followup.msgError == undefined || !followup.msgError == ''">
+                    <button type="button" class="close" data-dissmiss="alert" ng-click="followup.resetError()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div>
+                        <span id="spanError">{{followup.msgError}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form name="Personal" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label" for="follTypeSlct">Tipo de personal</label>
+                                    <select class="form-control" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" ng-change="followup.cambia()" id="follTypeSlct" ng-model="followup.auxPersonaDetails.type" ng-options="pTypeItem.Nombre for pTypeItem in followup.personalTypeColl" required></select>
+                                    <span id="ValTipo" style="color:red; font-size: small" hidden>Seleccione Tipo de personal</span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label" for="follNameTxt">Nombre</label>
+                                    <input name="name" maxlength="100" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" onkeypress="return soloLetras(event)" onblur="limpia()" type="text" class="form-control"
+                                           style="resize:none; text-transform:uppercase;" id="follNameTxt" placeholder="Inserta nombre"
+                                           ng-model="followup.auxPersonaDetails.name" input-letras />
+                                    <span ng-hide="followup.auxPersonaDetails.name || followup.auxPersonaDetails.firstName" id="ValNom" style="color:red; font-size: small" hidden>El nombre o apellido paterno es obligatorio</span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label" for="follFirstNameTxt">Apellido Paterno</label>
+                                    <input type="text" maxlength="100" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" onkeypress="return soloLetras(event)" class="form-control" id="follFirstNameTxt"
+                                           style="resize:none; text-transform:uppercase;"
+                                           placeholder="Inserta apellido paterno" ng-model="followup.auxPersonaDetails.firstName" input-letras />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label" for="follLastNameTxt">Apellido Materno</label>
+                                    <input type="text" maxlength="100" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" onkeypress="return soloLetras(event)" class="form-control" id="follLastNameTxt"
+                                           style="resize:none; text-transform:uppercase;"
+                                           placeholder="Inserta apellido materno" ng-model="followup.auxPersonaDetails.lastName" input-letras required />
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr style="color:white; background-color:#4D7DA6;">
+                                        <th ng-if="followup.record.followupIdRol != 3"></th>
+                                        <th>Tipo de personal</th>
+                                        <th>Nombre del personal</th>
+                                        <th>Apellido paterno del personal</th>
+                                        <th>Apellido materno del personal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="personalDetail in followup.personalDetails">
+                                        <td ng-if="followup.record.followupIdRol != 3">
+                                            <input type="checkbox" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" ng-model="personalDetail.selected" ng-click="followup.seekForClick()" />
+                                        </td>
+                                        <td>
+                                            <span style="display: inline-block; word-break:break-all;">
+                                                {{personalDetail.TipoPersonal}}
+                                            </span>
+                                            @*<input type="text" class="form-control" ng-model="personalDetail.type" readonly />*@
+                                        </td>
+                                        <td>
+                                            <span style="display: inline-block; word-break:break-all;">
+                                                {{personalDetail.Nombre}}
+                                            </span>
+                                            @*<input type="text" class="form-control" ng-model="personalDetail.name" readonly />*@
+                                        </td>
+                                        <td>
+                                            <span style="display: inline-block; word-break:break-all;">
+                                                {{personalDetail.ApellidoPaterno}}
+                                            </span>
+                                            @*<input type="text" class="form-control" ng-model="personalDetail.firstName" readonly />*@
+                                        </td>
+                                        <td>
+                                            <span style="display: inline-block; word-break:break-all;" t>
+                                                {{personalDetail.ApellidoMaterno}}
+                                            </span>
+                                            @*<input type="text" class="form-control" ng-model="personalDetail.lastName" readonly />*@
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-group col-md-12">
+                                <button ng-if="followup.record.followupIdRol != 3" ng-hide="!followup.personalDetails.length" ng-disabled="((followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false) || followup.enabledButton == false" type="button" style="margin-right: 10px" class="btn btn-danger btn-sm pull-left" ng-click="followup.remove()">Eliminar selección</button>
+                                <button type="button" class="btn btn-default btn-sm pull-left" ng-disabled="(followup.IdEstatusInterno != 2 && followup.IdEstatusInterno != 3) || followup.AsigPeticion == false" ng-click="followup.addNew(followup.auxPersonaDetails)">Agregar involucrado</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts{
+    <script>
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key);
+            letras = " abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+            especiales = [8, 9,39];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        function limpia() {
+            var val = document.getElementById("miInput").value;
+            var tam = val.length;
+            for (i = 0; i < tam; i++) {
+                if (!isNaN(val[i]))
+                    document.getElementById("miInput").value = '';
+            }
+        }
+    </script>
+    <script type="text/javascript">
+          $(document).ready(function () {
+                $("#liBandeja").addClass('active');
+                $("#liBitacora").removeClass('active');
+                $("#liDias").removeClass('active');
+                $("#liReportes").removeClass('active');
+                $("#liTablero").removeClass('active');
+          });
+    </script>
+}
+
+
+
+

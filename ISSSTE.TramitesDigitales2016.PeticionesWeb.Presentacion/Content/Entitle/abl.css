@@ -1,0 +1,91 @@
+/*
+@media (max-width: 900px) {
+  .container {
+    width: 100% !important;
+    padding: 0 10px 0 10px !important;
+    margin:  0 0 0 0!important;
+  }
+
+    body{ overflow-x: hidden; }
+
+}
+    
+*/
+
+.abl-alerta {
+    color: #d9534f;
+}
+
+.abl-folio {
+    width: 80%;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.abl-verbt {
+    margin-bottom: 8px;
+}
+
+.glyphicon {
+    top: 3px !important;
+}
+
+.abl-texticon {
+    font-family: sans-serif;
+}
+
+.abl-tdalert{
+    padding-left: 20px !important;
+}
+
+
+
+/* margins */
+
+.margintop-0{margin-top:0 !important;}
+.margintop-10{margin-top:10px !important;}
+.margintop-20{margin-top:20px !important;}
+.margintop-30{margin-top:30px !important;}
+.margintop-40{margin-top:40px !important;}
+.margintop-45{margin-top:45px !important;}
+.margintop-50{margin-top:50px !important;}
+.margintop-60{margin-top:60px !important;}
+.margintop-70{margin-top:70px !important;}
+.margintop-80{margin-top:80px !important;}
+.margintop-90{margin-top:90px !important;}
+.margintop-100{margin-top:100px !important;}
+
+.margintop--10{margin-top:-10px !important;}
+.margintop--20{margin-top:-20px !important;}
+.margintop--30{margin-top:-30px !important;}
+.margintop--40{margin-top:-40px !important;}
+.margintop--45{margin-top:-45px !important;}
+.margintop--50{margin-top:-50px !important;}
+.margintop--60{margin-top:-60px !important;}
+.margintop--70{margin-top:-70px !important;}
+.margintop--80{margin-top:-80px !important;}
+.margintop--90{margin-top:-90px !important;}
+.margintop--100{margin-top:-100px !important;}
+
+.marginbot-0{margin-bottom:0 !important;}
+.marginbot-10{margin-bottom:10px !important;}
+.marginbot-20{margin-bottom:20px !important;}
+.marginbot-30{margin-bottom:30px !important;}
+.marginbot-40{margin-bottom:40px !important;}
+.marginbot-50{margin-bottom:50px !important;}
+.marginbot-60{margin-bottom:60px !important;}
+.marginbot-70{margin-bottom:70px !important;}
+.marginbot-80{margin-bottom:80px !important;}
+.marginbot-90{margin-bottom:90px !important;}
+.marginbot-100{margin-bottom:100px !important;}
+
+.marginbot--10{margin-bottom:-10px !important;}
+.marginbot--20{margin-bottom:-20px !important;}
+.marginbot--30{margin-bottom:-30px !important;}
+.marginbot--40{margin-bottom:-40px !important;}
+.marginbot--50{margin-bottom:-50px !important;}
+.marginbot--60{margin-bottom:-60px !important;}
+.marginbot--70{margin-bottom:-70px !important;}
+.marginbot--80{margin-bottom:-80px !important;}
+.marginbot--90{margin-bottom:-90px !important;}
+.marginbot--100{margin-bottom:-100px !important;}

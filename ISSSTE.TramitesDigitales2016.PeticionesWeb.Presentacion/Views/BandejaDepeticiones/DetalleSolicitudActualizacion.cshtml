@@ -1,0 +1,203 @@
+﻿@model  ISSSTE.TramitesDigitales2016.Modelos.Contextos.pa_PeticionesWeb_Bandeja_Peticiones_Obtener_Peticiones_Detalle_Result
+
+
+@{
+    ViewBag.Title = "DetalleSolicitudActualizacion";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+
+<h2>Detalle de la petición</h2>
+
+<section>
+    <div class="form-group col-md-12">
+        <h3>Datos del peticionario</h3>
+        <hr class="red bottom-buffer top-buffer" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="control-label" for="curpPetTxt">Clave única de registro de población:</label>
+            @Html.EditorFor(model => model.CurpPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CurpPeticionario, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="rfcPetTxt">Registro federal de contribuyente:</label>
+            @Html.EditorFor(model => model.RfcAfectado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RfcAfectado, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="nombreTxt">Nombre(s):</label>
+            @Html.EditorFor(model => model.NombreAfectado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NombreAfectado, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label" for="apPaternoTxt">Apellido paterno:</label>
+            @Html.EditorFor(model => model.ApePaternoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CurpPeticionario, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="apMaternoTxt">Apellido materno:</label>
+            @Html.EditorFor(model => model.ApeMaternoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RfcAfectado, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="sexoSlct">Sexo:</label>
+            @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="tipoDerSlct">Tipo de derechohabiente:</label>
+            @Html.DropDownList("IdTipoDerechohabiente", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+   </div>
+</section>
+
+<section>
+    <div class="form-group col-md-12">
+        <h3>Datos de contacto</h3>
+        <hr class="red bottom-buffer top-buffer" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="control-label" for="codPostTxt">Código postal:</label>
+            @Html.EditorFor(model => model.CPPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="estadoSlct">Estado:</label>
+            @Html.DropDownList("CatalogoEstado", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="municipioSlct">Municipio o alcaldía:</label>
+            @Html.EditorFor(model => model.MpioPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label" for="coloniaTxt">Colonia:</label>
+            @Html.EditorFor(model => model.ColoniaPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="calleTxt">Calle:</label>
+            @Html.EditorFor(model => model.CallePeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="numExtTxt">Número exterior:</label>
+            @Html.EditorFor(model => model.NumeroExteriorPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="numIntTxt">Número interior:</label>
+            @Html.EditorFor(model => model.NumeroInteriorPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="ladaTxt">Lada:</label>
+            @Html.EditorFor(model => model.LadaPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label" for="telefTxt">Teléfono fijo:</label>
+            @Html.EditorFor(model => model.TelefonoFijoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label" for="celTxt">Teléfono móvil:</label>
+            @Html.EditorFor(model => model.TelefonoMovilPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label" for="emailTxt">Correo electrónico:</label>
+            @Html.EditorFor(model => model.CorreoElectronicoPeticionario, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+
+    </div>
+</section>
+
+<section>
+    <div class="form-group col-md-12">
+        <h3>Datos del afectado</h3>
+        <hr class="red bottom-buffer top-buffer" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="curpAfectadoTxt" class="control-label">CURP del afectado:</label>
+            @Html.EditorFor(model => model.CurpAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rfcAfectadoTxt" class="control-label">RFC del afectado:</label>
+            @Html.EditorFor(model => model.RfcAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="afecNomTxt" class="control-label">Nombre(s) del afectado:</label>
+            @Html.EditorFor(model => model.NombreAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="afecApPatTxt" class="control-label">Apellido paterno del afectado:</label>
+            @Html.EditorFor(model => model.ApePaternoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="afecApMatTxt" class="control-label">Apellido materno del afectado:</label>
+            @Html.EditorFor(model => model.ApeMaternoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="afecSexoSlct" class="control-label">Sexo del afectado:</label>
+            @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="afecTipoDerSlct" class="control-label">Tipo de derechohabiente:</label>
+            @Html.DropDownList("IdTipoDerechohabiente", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="afecTelTxt" class="control-label">Teléfono del afectado:</label>
+            @Html.EditorFor(model => model.TelefonoFijoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="afecEmailTxt" class="control-label">Correo electrónico del afectado:</label>
+            @Html.EditorFor(model => model.CorreoElectronicoAfectado, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="form-group col-md-12">
+        <h3>Descripción de la petición</h3>
+        <hr class="red bottom-buffer top-buffer" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="areaPeticionSlct" class="control-label">Área a donde corresponde la petición:</label>
+            @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="delPeticionSlct" class="control-label">Delegación/Hospitales:</label>
+            @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="unidadPeticionSlct" class="control-label">Nombre de la unidad:</label>
+            @Html.DropDownList("IdGenero", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="opinionPetSlct" class="control-label">Tipo de opinión:</label>
+            @Html.DropDownList("CatalogoTipoOpinion", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="asuntoPetSlct" class="control-label">Causa del asunto:</label>
+            @Html.DropDownList("CatalogoCausasAsunto", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="hechosdatePicker" class="control-label">Fecha de los hechos:</label>
+            @Html.EditorFor(model => model.FechaHechos, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="servicioHechoSlct" class="control-label">Servicios donde ocurrieron los hechos:</label>
+            @Html.DropDownList("CatalogoServHecho", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-8">
+            <label for="descTxtArea" class="control-label">Descripción:</label>
+            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+</section>
+
+
+
+

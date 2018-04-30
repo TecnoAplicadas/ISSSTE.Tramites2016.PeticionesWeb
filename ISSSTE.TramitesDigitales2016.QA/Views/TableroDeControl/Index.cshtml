@@ -1,0 +1,243 @@
+﻿@model ISSSTE.TramitesDigitales2016.PeticionesWeb.Presentacion.Models.ViewModelTableroControl
+@{
+    ViewBag.Title = "Tablero De Control";
+    Layout = "~/Views/Shared/_LayoutPeticiones.cshtml";
+}
+@{int? idRol = Convert.ToInt32(Session["IdUsuarioRolReportes"]); }
+<div class="row">
+    <div class="col-md-12">
+        <h2>Tablero de control</h2>
+        <hr class="Negro1" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        @if (ViewBag.ErrorMessageFecha != null)
+        {
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @ViewBag.ErrorMessageFecha
+            </div>
+        }
+        @if (ViewBag.InfoMessage != null)
+        {
+            <div class="alert alert-info">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @ViewBag.InfoMessage
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            @if (idRol == 1)
+            {
+                <p class="text-justify">
+                    Selecciona una opción en la lista delegaciones. Si seleccionas una opción en las listas de estatus,
+                    causa y tipo opinión, el tablero de control será especifico. Al final, solo da clic en <strong>Descargar</strong>.
+                    <br />
+                </p>
+            }
+            @if (idRol == 2)
+            {
+                <p>
+                    <strong>Enlace Delegacional:</strong> Si seleccionas una opción en las listas de estatus,causa y tipo opinión,
+                    el tablero de control será especifico. Al final, solo da clic en <strong>Descargar</strong>.
+                </p>
+            }
+        </div>
+    </div>
+</div>
+<br /><br />
+@using (Html.BeginForm())
+{
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label class="control-label bodyText">Delegación:</label>
+            @Html.DropDownListFor(model => model.FiltrosTableroControl.Delegacion, Model.Delegacion, 
+                                  new { @class = "form-control", @id = "delegaciones" })
+            @Html.EditorFor(model => model.FiltrosTableroControl.psNombreDelegacion, 
+                                  new { htmlAttributes = new { @class = "form-control hide", @id = "delegacionNombre" } })
+        </div>
+        <div class="col-md-4">
+            <label class="control-label bodyText">Unidad:</label><!--"Seleccionar..."-->
+            @Html.DropDownListFor(model => model.FiltrosTableroControl.Ups, new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "ups" })
+        </div>
+        <div class="col-md-4">
+            <label class="control-label bodyText">Estatus:</label>
+            @Html.DropDownListFor(model => model.FiltrosTableroControl.Status, Model.Status, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label class="control-label bodyText" for="endDate">Fecha Inicio*:</label>
+            <div class="input-group date">
+                <span class="input-group-addon" id="datepickerSpan1">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                @Html.EditorFor(model => model.FiltrosTableroControl.FechaInicio, new { htmlAttributes = new { @class = "form-control", @style = "Width:82%; background:white;", @id = "datepickerStart", required = "required", @Placeholder = "dd/mm/aaaa", @readonly = "readonly" } })
+            </div>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label bodyText" for="endDate">Tipo opinión:</label>
+            @Html.DropDownListFor(model => model.FiltrosTableroControl.TipoOpinion, Model.TiposOpinion, 
+                                  new { @class = "form-control", @id = "tipoOpinion" })
+
+        </div>
+        <div class="col-md-4">
+            <label class="control-label bodyText">Causa:</label>
+            @Html.DropDownListFor(model => model.FiltrosTableroControl.CausaAsunto, new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "causaAsunto" })
+        </div>
+    </div>
+    <br /><br />
+        <div class="row bottom-buffer btn-group-lg">
+            <div class="col-md-4 setMiddle"><p style="color:#545454">Campos obligatorios *</p></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!--
+                 <a href="@Url.Action("TableroDeControl")" class="btn btn-danger">
+                   <span> Cancelar</span>
+                   <span class="glyphicon glyphicon-remove"></span>
+                </a>-->
+                <button class="btn btn-primary" id="btnReporte" type="submit">
+                    <span>Descargar</span>
+                    <span class="glyphicon glyphicon-download"></span>
+                </button>
+
+                @*@Html.ActionLink("DescargarArchivo", "Download")*@
+                @*<button onclick="location.href='@Url.Action("Index", "TableroDeControl")';return false;"
+                        class="btn btn-danger btn-sm">
+                    <span>Cancelar</span>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>*@
+
+
+
+
+                <a id="btnLimpiar" onclick="false" class="btn btn-danger">
+                    <span> Cancelar</span>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+
+            </div>
+        </div>
+}
+<br /><br /><br />
+@section scripts{
+    @Scripts.Render("~/bundles/jQureyTablero")
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript">
+      $(document).ready(function () {
+         $("#ups").append('<option value="">-Selecciona-</option>');
+         //Se realiza una peticion por medio de ajax, con el fin de cargar el combo de Ups.
+         $("#delegaciones").change(function () {
+            $('#ups').find('option:not(:first)').remove();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("GetUps")',
+               dataType: 'json',
+               data: { id: $('#delegaciones').val() },
+               success: function (ups) {
+                  $.each(ups, function (i, ups) {
+                     $("#ups").append('<option value="' + ups.Value + '">' +
+                         ups.Text + '</option>');
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al consultar las unidades.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+      $(document).ready(function () {
+         $("#ups").append('<option value="">-Selecciona-</option>');
+         //Se realiza una peticion por medio de ajax, con el fin de cargar el combo de Ups.
+         $("#delegaciones").ready(function () {
+            $('#ups').find('option:not(:first)').remove();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("GetUps")',
+               dataType: 'json',
+               data: { id: $('#delegaciones').val() },
+               success: function (ups) {
+                  $.each(ups, function (i, ups) {
+                     $("#ups").append('<option value="' + ups.Value + '">' +
+                         ups.Text + '</option>');
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al consultar las unidades.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+         $("#causaAsunto").append('<option value="">-Selecciona-</option>');
+         //Se realiza una peticion por medio de ajax, con el fin de cargar el combo de TipoOpinion.
+         $("#tipoOpinion").change(function () {
+            $('#causaAsunto').find('option:not(:first)').remove();
+            $.ajax({
+               type: 'POST',
+               url: '@Url.Action("GetCausaAsunto")',
+               dataType: 'json',
+               data: { id: $('#tipoOpinion').val() },
+               success: function (causas) {
+                  $.each(causas, function (i, causa) {
+                     $("#causaAsunto").append('<option value="' + causa.Value + '">' +
+                         causa.Text + '</option>');
+                  });
+               },
+               error: function (ex) {
+                  alert('Error al consultar causa asunto.' + ex);
+               }
+            });
+            return false;
+         })
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+         if ($('#delegaciones option').length == 0) {
+            $('#btnReporte').prop("disabled", true);
+         }
+      });
+      $('#delegaciones').change(function () {
+         var nombre = $("#delegaciones :selected").text();
+         $("#delegacionNombre").val(nombre);
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+         $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+    <script type="text/javascript">
+      $("#li4").ready(function () {
+         $("#liBandeja").removeClass('active');
+         $("#liBitacora").removeClass('active');
+         $("#liDias").removeClass('active');
+         $("#liReportes").removeClass('active');
+         $("#liTablero").addClass('active');
+      });
+    </script>
+
+    <script type="text/javascript">
+             $(document).ready(function() {
+                 $("#btnLimpiar").click(function() {
+                 $("form")[0].reset();
+               });
+             });
+    </script>
+}

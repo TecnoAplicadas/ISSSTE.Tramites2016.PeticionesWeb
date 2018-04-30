@@ -1,0 +1,113 @@
+﻿<!-- //######################################################################
+//     ##Fecha de creación: 18/03/16
+//     ##Fecha de última modificación: 18/04/16
+//     ##Responsable: Emanuel De la Isla Vértiz
+//     ##Módulos asociados: quotesController.js, quotesDataService.js
+//     ##Id Tickets asociados al cambio: R-013165
+//####################################################################-->
+
+    <!--Analitix Grafica Base-->
+    <script type="text/javascript">
+
+        function udm_(e) {
+            var t = "comScore=", n = document, r = n.cookie, i = "", s = "indexOf", o = "substring", u = "length", a = 2048, f, l = "&ns_", c = "&", h, p, d, v, m = window, g = m.encodeURIComponent || escape; if (r[s](t) + 1) for (d = 0, p = r.split(";"), v = p[u]; d < v; d++) h = p[d][s](t), h + 1 && (i = c + unescape(p[d][o](h + t[u]))); e += l + "_t=" + +(new Date) + l + "c=" + (n.characterSet || n.defaultCharset || "") + "&c8=" + g(n.title) + i + "&c7=" + g(n.URL) + "&c9=" + g(n.referrer), e[u] > a && e[s](c) > 0 && (f = e[o](0, a - 8).lastIndexOf(c), e = (e[o](0, f) + l + "cut=" + g(e[o](f + 1)))[o](0, a)), n.images ? (h = new Image, m.ns_p || (ns_p = h), h.src = e) : n.write("<", "p", "><", 'img src="', e, '" height="1" width="1" alt="*"', "><", "/p", ">")
+        };
+
+        function uid_call(a, b) {
+            ui_c2 = 17183199; // your corporate c2 client value
+            ui_ns_site = 'gobmx_isssste_td-ssf-cv'; // your sites identifier
+            window.b_ui_event = window.c_ui_event != null ? window.c_ui_event : "", window.c_ui_event = a;
+            var ui_pixel_url = 'https://sb.scorecardresearch.com/p?c1=2&c2=' + ui_c2 + '&ns_site=' + ui_ns_site + '&name=' + a + '&ns_type=hidden&type=hidden&ns_ui_type=' + b;
+            var b = "comScore=", c = document, d = c.cookie, e = "", f = "indexOf", g = "substring", h = "length", i = 2048, j, k = "&ns_", l = "&", m, n, o, p, q = window, r = q.encodeURIComponent || escape; if (d[f](b) + 1) for (o = 0, n = d.split(";"), p = n[h]; o < p; o++) m = n[o][f](b), m + 1 && (e = l + unescape(n[o][g](m + b[h]))); ui_pixel_url += k + "_t=" + +(new Date) + k + "c=" + (c.characterSet || c.defaultCharset || "") + "&c8=" + r(c.title) + e + "&c7=" + r(c.URL) + "&c9=" + r(c.referrer) + "&b_ui_event=" + b_ui_event + "&c_ui_event=" + c_ui_event, ui_pixel_url[h] > i && ui_pixel_url[f](l) > 0 && (j = ui_pixel_url[g](0, i - 8).lastIndexOf(l), ui_pixel_url = (ui_pixel_url[g](0, j) + k + "cut=" + r(ui_pixel_url[g](j + 1)))[g](0, i)), c.images ? (m = new Image, q.ns_p || (ns_p = m), m.src = ui_pixel_url) : c.write("<p><img src='", ui_pixel_url, "' height='1' width='1' alt='*'></p>");
+        }
+        udm_('https://sb.scorecardresearch.com/b?c1=2&c2=17183199&ns_site=gobmx&name=Velacion.MisCotizaciones');
+    </script>
+	<noscript><p><img src="https://sb.scorecardresearch.com/p?c1=2&amp;amp;c2=17183199&amp;amp;ns_site=gobmx&amp;amp;name=ISSSTE.CremacionVelacion.MisCotizaciones" height="1" width="1" alt="*"></p></noscript>
+<!-- End Digital Analytix Tag 1.1302.13 -->
+
+
+<div data-ng-controller="quotesController as vm" data-ng-init="vm.initQuotes()">
+
+    <!-- Datos generales -->
+    <div class="row">
+        <div class="col-lg-12 ">
+            <h2>Cotizaciones activas</h2>
+            <hr class="red">
+            <h4 class="hide">Folio: 0918271876376354</h4>
+            <div class="col-xs-12  ">
+
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th> <os-p>Folio</os-p></th>
+                            <th><os-p>Total ISSSTE</os-p></th>
+                            <th> <os-p>Total público</os-p> </th>
+                            <th> <os-p>Acciones</os-p> </th>
+                        </tr>
+                    </thead>
+
+                    <tbody data-ng-repeat="aq in vm.quotesActive">
+                        <tr>
+                            <td> <os-p>{{$index + 1}}</os-p></td>
+                            <td> <os-p>{{aq.Folio}}</os-p></td>
+                            <td><os-p class="pIssste">{{aq.EntitleTotal | currency:"$"}}</os-p></td>
+                            <td> <os-p class="ppublico">{{aq.PublicTotal | currency:"$"}}</os-p></td>
+                            <td>
+                                <a class="btn btn-default btn-sm" type="button" data-ng-click="vm.getReview(aq.QuotationId, nc.navigateToDetailsUrl)">Ver</a>
+                                <a class="btn btn-primary pull-right btn-sm abl-verbt" type="button" data-ng-click="vm.getReport(aq.QuotationId)" ng-href="{{vm.reportUrl}}" target="_blank">Descargar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row bottom-buffer">
+        <div class="col-xs-12 marg-T30px marg-B30px ">
+            <h2>Cotizaciones vencidas</h2>
+            <hr class="red">
+            <div class="col-xs-12  ">
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th> <os-p>Folio</os-p></th>
+                            <th><os-p>Total ISSSTE</os-p></th>
+                            <th> <os-p>Total público</os-p> </th>
+                            <th> <os-p>Acciones</os-p> </th>
+                        </tr>
+                    </thead>
+
+                    <tbody data-ng-repeat="aq in vm.quotesExpired">
+                        <tr>
+                            <td> <os-p>{{$index + 1}}</os-p></td>
+                            <td> <os-p>{{aq.Folio}}</os-p></td>
+                            <td><os-p class="pIssste">{{aq.EntitleTotal | currency:"$"}}</os-p></td>
+                            <td> <os-p class="ppublico">{{aq.PublicTotal | currency:"$"}}</os-p></td>
+                            <td>
+
+                                <a onclick="uid_call('ISSSTE.Velacion.Ver', 'clickin')" class="btn btn-default btn-sm" type="button" data-ng-click="vm.getReview(aq.QuotationId, nc.navigateToDetailsUrl)">Ver</a>
+                                <a onclick="uid_call('ISSSTE.Velacion.Descargar', 'pdf')" class="btn btn-primary pull-right btn-sm abl-verbt" type="button" data-ng-click="vm.getReport(aq.QuotationId)" ng-href="{{vm.reportUrl}}" target="_blank">Descargar</a>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Se agrega el Breadcrumbs Grafica Base
+    $('#navinicio').removeClass("active");
+    $('#navabout').addClass("hidden");
+    $('#navrequest').removeClass("hidden");
+
+</script>

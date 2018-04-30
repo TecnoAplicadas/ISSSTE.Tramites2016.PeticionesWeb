@@ -1,0 +1,155 @@
+﻿/*Morado*/
+.table > thead > tr > td.Morado,
+.table > tbody > tr > td.Morado,
+.table > tfoot > tr > td.Morado,
+.table > thead > tr > th.Morado,
+.table > tbody > tr > th.Morado,
+.table > tfoot > tr > th.Morado,
+.table > thead > tr.Morado > td,
+.table > tbody > tr.Morado > td,
+.table > tfoot > tr.Morado > td,
+.table > thead > tr.Morado > th,
+.table > tbody > tr.Morado > th,
+.table > tfoot > tr.Morado > th {
+  background-color: #DBC7F0;
+  border-color: #DBC7F0;
+}
+
+/*Hover Morado*/ 
+.table-hover > tbody > tr > td.Morado:hover,
+.table-hover > tbody > tr > th.Morado:hover,
+.table-hover > tbody > tr.Morado:hover > td {
+  background-color: #C2A0E5;
+  border-color: #C2A0E5;
+}
+
+/*Azul*/
+.table > thead > tr > td.Azul,
+.table > tbody > tr > td.Azul,
+.table > tfoot > tr > td.Azul,
+.table > thead > tr > th.Azul,
+.table > tbody > tr > th.Azul,
+.table > tfoot > tr > th.Azul,
+.table > thead > tr.Azul > td,
+.table > tbody > tr.Azul > td,
+.table > tfoot > tr.Azul > td,
+.table > thead > tr.Azul > th,
+.table > tbody > tr.Azul > th,
+.table > tfoot > tr.Azul > th {
+  background-color: #ADDFF7;
+  border-color: #ADDFF7;
+}
+
+/*Hover Azul*/ 
+.table-hover > tbody > tr > td.Azul:hover,
+.table-hover > tbody > tr > th.Azul:hover,
+.table-hover > tbody > tr.Azul:hover > td {
+  background-color: #70CAF5;
+  border-color: #70CAF5;
+}
+
+
+
+/*Verde*/
+.table > thead > tr > td.Verde,
+.table > tbody > tr > td.Verde,
+.table > tfoot > tr > td.Verde,
+.table > thead > tr > th.Verde,
+.table > tbody > tr > th.Verde,
+.table > tfoot > tr > th.Verde,
+.table > thead > tr.Verde > td,
+.table > tbody > tr.Verde > td,
+.table > tfoot > tr.Verde > td,
+.table > thead > tr.Verde > th,
+.table > tbody > tr.Verde > th,
+.table > tfoot > tr.Verde > th {
+  background-color: #3CB371;
+  border-color: #3CB371;
+}
+
+/*Hover Verde*/ 
+.table-hover > tbody > tr > td.Verde:hover,
+.table-hover > tbody > tr > th.Verde:hover,
+.table-hover > tbody > tr.Verde:hover > td {
+  background-color: #90EE90;
+  border-color: #90EE90;
+}
+
+/*Negro*/
+.table > thead > tr > td.Negro,
+.table > tbody > tr > td.Negro,
+.table > tfoot > tr > td.Negro,
+.table > thead > tr > th.Negro,
+.table > tbody > tr > th.Negro,
+.table > tfoot > tr > th.Negro,
+.table > thead > tr.Negro > td,
+.table > tbody > tr.Negro > td,
+.table > tfoot > tr.Negro > td,
+.table > thead > tr.Negro > th,
+.table > tbody > tr.Negro > th,
+.table > tfoot > tr.Negro > th {
+  background-color: #8e908e;
+  border-color: #8e908e;
+}
+
+/*Hover Negro*/ 
+.table-hover > tbody > tr > td.Negro:hover,
+.table-hover > tbody > tr > th.Negro:hover,
+.table-hover > tbody > tr.Negro:hover > td {
+  background-color: #bbbdbb;
+  border-color: #bbbdbb;
+}
+
+
+
+/*Amarillo*/
+.table > thead > tr > td.Amarillo,
+.table > tbody > tr > td.Amarillo,
+.table > tfoot > tr > td.Amarillo,
+.table > thead > tr > th.Amarillo,
+.table > tbody > tr > th.Amarillo,
+.table > tfoot > tr > th.Amarillo,
+.table > thead > tr.Amarillo > td,
+.table > tbody > tr.Amarillo > td,
+.table > tfoot > tr.Amarillo > td,
+.table > thead > tr.Amarillo > th,
+.table > tbody > tr.Amarillo > th,
+.table > tfoot > tr.Amarillo > th {
+  background-color: #ecda79;
+  border-color: #ecda79;
+}
+
+/*Hover Amarillo*/ 
+.table-hover > tbody > tr > td.Amarillo:hover,
+.table-hover > tbody > tr > th.Amarillo:hover,
+.table-hover > tbody > tr.Amarillo:hover > td {
+  background-color: #fcf8e3;
+  border-color: #fcf8e3;
+}
+
+
+
+/*Rojo*/
+.table > thead > tr > td.Rojo,
+.table > tbody > tr > td.Rojo,
+.table > tfoot > tr > td.Rojo,
+.table > thead > tr > th.Rojo,
+.table > tbody > tr > th.Rojo,
+.table > tfoot > tr > th.Rojo,
+.table > thead > tr.Rojo > td,
+.table > tbody > tr.Rojo > td,
+.table > tfoot > tr.Rojo > td,
+.table > thead > tr.Rojo > th,
+.table > tbody > tr.Rojo > th,
+.table > tfoot > tr.Rojo > th {
+  background-color: #f67e7e;
+  border-color: #f67e7e;
+}
+
+/*Hover Rojo*/ 
+.table-hover > tbody > tr > td.Rojo:hover,
+.table-hover > tbody > tr > th.Rojo:hover,
+.table-hover > tbody > tr.Rojo:hover > td {
+  background-color: #f8d9d9;
+  border-color: #f8d9d9;
+}

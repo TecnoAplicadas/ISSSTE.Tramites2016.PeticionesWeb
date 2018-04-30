@@ -1,0 +1,38 @@
+﻿<center>
+<table width="560px">
+	<tr height="76px" bgcolor="#393C3E">
+		<td>
+			<div style="padding-left:27px; padding-right:27px;">
+				<img src="[PATHLOGO]gobmxlogo.png" align="left">
+				<img src="[PATHLOGO]issste-logo.png" align="right" style="width:150px; height:50px;">
+			</div>
+		</td>
+	</tr>
+	<tr>
+	   <td> 
+			<div style="padding-left:27px; padding-right:27px; font-family:Arial; font-size:16px; color:#5A5A5A;">
+				<br><br>
+				<b>Estimado Peticionario:</b>
+				<br><br>
+				Por este medio te informamos que la petici&oacute;n recibida a trav&eacute;s de la p&aacute;gina 
+				<a href="https://www.gob.mx/">www.gob.mx</a>, 
+				con folio n&uacute;mero <b>[FOLIO]</b> fue atendida y se da por <b>concluida</b>, 
+				toda vez que se ha contestado en estricto apego a la normatividad.
+				<br><br>
+
+				<br>
+				*No debes contestar este mensaje ya que fue generado autom&aacute;ticamente.
+				<br><br>
+			</div>
+	   </td>
+	</tr>
+	<tr height="76px" bgcolor="#393C3E">
+		<td>
+			<div style="padding-left:27px; padding-right:27px;"">
+				<img src="[PATHLOGO]gobmxlogo.png" align="left" style="width:63px; height:19.5px;">
+				<img src="[PATHLOGO]logo_mexico.png" align="right" style="width:86px; height:35px;">
+			</div>
+		</td>
+	</tr>
+</table>
+</center>
